@@ -1,0 +1,21 @@
+<section class="article-container">
+    {{ range where .Site.RegularPages "Section" "tutorials" }}
+    <article >
+        <a href="{{ .RelPermalink  }}">
+        {{ if .Params.image }}
+            <img src="{{ .Params.image }}" alt="{{ .Title }}">                
+        {{ end }}      
+        <div class="content">
+           
+                <h2 class="heading-1">{{ .Title }}</h2>
+                {{ if .PublishDate  }}
+                <p>{{ .Date.Format "January 2, 2006" }}</p>
+                {{ else }}
+                <p>Unkown</p>
+                {{ end }}
+                <p class="article-p">{{ .Content | strings.Truncate 70 | plainify | safeHTML }}</p>
+            </a>
+        </div>
+    </article>
+    {{ end }}
+</section>

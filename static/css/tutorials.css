@@ -1,0 +1,37 @@
+i {
+    transform: rotate(180deg);
+}
+
+header a {
+    display: block;
+    margin: clamp(1rem, 5vw, 3rem);
+    position: fixed;
+    z-index: 100;
+}
+
+
+header .container {
+    padding: clamp(40vh, 10vw, 12rem);
+    text-align: center;
+    width: 100%;
+    max-width: 1400px;
+    place-self: center;
+    
+}
+
+@media (max-width: 768px) {
+    header a {
+        margin: 1rem;
+    }
+    
+    header .container {
+        padding: clamp(10rem, 8vw, 8rem);
+    }
+}
+
+@media (max-width: 480px) {
+    header .container {
+        padding: clamp(10rem, 5vw, 4rem);
+    }
+}
+

@@ -1,0 +1,26 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+theme = 'Shika'
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+   [[menu.main]]
+    name = "Articles"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "Tutorials"
+    url = "/tutorials/"
+    weight = 3
+  [[menu.main]]
+    name = "Gallary"
+    url = "/gallary/"
+    weight = 4
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 5

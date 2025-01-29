@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ absURL `css/style.css`}}">
+    <link rel="stylesheet" href="{{ absURL `css/article.css` }}">
+    <title>{{.Title}}</title>
+</head>
+<body>
+    <header>
+       <div class="container">
+        <a href="{{ absURL `/` }}">
+            <i class="fa-solid fa-arrow-right"></i>
+            Back to home
+        </a>
+       </div>
+    </header>
+    <main>
+        <div class="main-container">
+            {{- partial "article.html" . -}}
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+</body>
+</html>

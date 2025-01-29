@@ -1,0 +1,164 @@
+@import "./reset.css";
+@import "./utilies.css";
+
+
+
+body {
+    min-width: 320px;
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 5vw;
+}
+
+.line {
+    border-bottom: 3px solid rgba(245, 245, 245, 0.664);
+    width: 100%;
+    margin: 0 auto;
+}
+
+header .container .container-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    padding: 1rem;
+}
+
+header .container .container-center .about-me {
+    width: 100%;
+    max-width: 500px;
+}
+
+header .container .container-center .about-me h2 {
+    padding-bottom: 0.5em;
+}
+
+header .container .container-center .about-me p {
+    line-height: 1.5;
+}
+
+header .container .container-center .img-content {
+    display: grid;
+    gap: 1rem;
+}
+
+header .container .container-center .img-content p {
+    place-self: center;
+    font-weight: 900;
+}
+
+header .container .container-center .img-content img {
+    width: clamp(150px, 30vw, 200px);
+    height: clamp(150px, 30vw, 200px);
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+header .container .container-center .social {
+    display: grid;
+    gap: 1rem;
+}
+
+header .container .container-center .social i {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+main .main-container {
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+
+main .main-container nav {
+    position: sticky;
+    top: 1rem;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    z-index: 10;
+}
+
+main .main-container nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0.5rem;
+}
+
+main .main-container nav ul li {
+    border-bottom: 1px solid white;
+    transition: 0.2s all;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+main .main-container nav ul li a:hover {
+    color: #00ffab;
+}
+
+.article-container {
+    width: 100%;
+    margin-top: 3rem;
+    padding: 0 1rem;
+}
+
+.article-container article {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 650px;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid white;
+    padding: 1.25rem 0;
+}
+
+.article-container article .content p {
+    padding-top: 0.625rem;
+}
+
+.article-container article img {
+    width: 100%;
+    height: auto;
+}
+
+footer p {
+    place-self: center;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    header .container .container-center {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    main .main-container nav ul {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+
+    header .container .container-center .img-content img {
+        width: 150px;
+        height: 150px;
+    }
+
+    main .main-container nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}

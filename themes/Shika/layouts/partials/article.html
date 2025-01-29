@@ -1,0 +1,25 @@
+{{$lang := "rtl"}}
+{{ if eq .Params.language "ar"}}
+{{ $lang = "rtl" }}
+{{ else }}
+{{ $lang = "ltr" }}
+{{ end }}
+
+<div class="pos" dir="{{ $lang }}">
+    {{ if .Params.image }}
+    <img src="{{ .Params.image }}" alt="{{ .Title }}">
+    {{ else }}
+    <div style="width:400px;height:400px;"></div>
+    {{ end }}   
+    <div class="content">
+
+        <h1 class="heading-1">{{ .Title }}</h1>
+        {{ if .Params.Tags }}
+        <p>Tags: {{ partial "tags.html" . -}}</p>
+        {{ end }}
+        <p class="ordinary-p published-at">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</p>
+           <div class="article-p article-content">
+            {{ .Content | safeHTML }}
+           </div>
+    </div>
+</div>

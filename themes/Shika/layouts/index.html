@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+{{- partial "head.html" . -}}
+
+<body>
+    {{- partial "header.html" . -}}
+
+    <main>
+        <div class="main-container">
+            {{- partial "navbar.html" . -}}
+            {{- partial "list_articles.html" . -}}
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+</body>
+<script src="{{ absURL `js/logic.js` }}"></script>
+</html>

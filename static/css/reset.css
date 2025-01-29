@@ -1,0 +1,72 @@
+body {
+	margin: 0;
+	
+}
+
+/* For modern browsers */
+::-webkit-scrollbar {
+  width: 8px;  /* Width of scrollbar */
+}
+
+/* Track (background of scrollbar) */
+::-webkit-scrollbar-track {
+  background: #111;  /* Dark grey to blend with black background */
+  border-radius: 10px;
+}
+
+/* Scrollbar thumb (draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #444;  /* Slightly lighter grey */
+  border-radius: 10px;
+}
+
+/* Hover effect on scrollbar thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: #666;  /* Lighter grey on hover */
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #111;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p,
+li,
+a {
+  margin: 0;
+  color: white;
+  line-height: 1.7;
+  letter-spacing: 1.2px;
+
+}
+
+
+img {
+    max-width: 100%;
+	max-height: 100%;
+    display: block;
+}
+
+i
+{
+    color: white;
+}
