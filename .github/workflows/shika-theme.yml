@@ -1,0 +1,46 @@
+name: Test Hugo Theme
+
+on:
+  push:
+    branches:
+      - master  
+  pull_request:
+    branches:
+      - master  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.107.0"  
+
+      - name: Create hugo site
+        run: |
+          hugo new site shika_theme
+          cd shika_theme
+          git init
+          git submodule add https://github.com/blackaly/shika_hugo_theme themes/Shika
+          echo 'theme = "Shika"' >> config.toml
+          hugo new posts/test-post.md
+          echo 'Hello, world!' >> content/posts/test-post.md
+
+      # Build the test site
+      - name: Build hugo site
+        run: |
+          cd shika_theme
+          hugo --minify
+
+      # Serve the test site (optional)
+      - name: Serve hugo site
+        run: |
+          cd shika_theme
+          hugo server &
+          sleep 5  # Wait for the server to start
+          curl http://localhost:1313  # Check if the site is accessible

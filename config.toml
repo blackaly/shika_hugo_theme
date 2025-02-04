@@ -1,7 +1,9 @@
-baseURL = 'http://example.org/'
+baseURL = "/"
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = 'Shika'
+contentDir = "content"
+publishDir = "public"
 
 [menu]
   [[menu.main]]
@@ -10,17 +12,17 @@ theme = 'Shika'
     weight = 1
    [[menu.main]]
     name = "Articles"
-    url = "/posts/"
+    url = "posts/"
     weight = 2
   [[menu.main]]
     name = "Tutorials"
-    url = "/tutorials/"
+    url = "tutorials/"
     weight = 3
   [[menu.main]]
     name = "Gallary"
-    url = "/gallary/"
+    url = "gallary/"
     weight = 4
   [[menu.main]]
     name = "Tags"
-    url = "/tags/"
+    url = "tags/"
     weight = 5
