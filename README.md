@@ -19,7 +19,7 @@ hugo new site my-blog
 cd my-blog
 
 git init
-git submodule add https://github.com/blackaly/shika_hugo_theme.git themes/shika
+git submodule add https://github.com/blackaly/shika_hugo_theme.git themes/Shika
 theme = "shika"
 hugo server -D
 ```
