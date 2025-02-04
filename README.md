@@ -36,7 +36,6 @@ docker run -p 8085:80 shika_theme
 ## Configuration
 
 ### Basic Configuration
-```toml
 Here’s an example `config.toml` file:
 ```toml
 baseURL = "/"
