@@ -5,7 +5,7 @@ image: /img/1.jpeg
 draft: true
 ---
 
-# The Evolution of Technology: Shaping the Future
+# _</u>The Evolution of Technology: Shaping the Future<u>_
 
 Technology has become an integral part of our daily lives, revolutionizing the way we live, work, and interact with the world. From the invention of the wheel to the rise of artificial intelligence, technology has continuously evolved, driving progress and innovation. In this article, we will explore the history, current trends, and future possibilities of technology, and how it is shaping the future of humanity.
 
