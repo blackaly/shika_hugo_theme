@@ -26,8 +26,9 @@ hugo server -D
 ## Docker Installation
 
 ```bash
+git clone https://github.com/blackaly/shika_hugo_theme.git
 docker build -t shika_theme .
-docker run -p 8085:80 shika_theme
+docker run -d -p 8085:80 shika_theme
 ```
 
 
