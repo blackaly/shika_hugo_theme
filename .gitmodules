@@ -1,0 +1,3 @@
+[submodule "themes/Shika"]
+    path = themes/Shika
+    url = https://github.com/blackaly/shika_hugo_theme

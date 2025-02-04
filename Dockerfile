@@ -3,6 +3,7 @@ FROM klakegg/hugo:0.107.0-ext-ubuntu AS builder
 WORKDIR /src
 
 COPY . .
+RUN git submodule update --init --recursive
 
 # Build the Hugo site
 RUN hugo --minify -D
