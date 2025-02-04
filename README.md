@@ -13,6 +13,7 @@
 
 ### Step 1: Create a New Hugo Site
 If you don’t already have a Hugo site, create one:
+
 ```bash
 hugo new site my-blog
 cd my-blog
@@ -32,10 +33,10 @@ docker run -p 8085:80 shika_theme
 
 ---
 
-```markdown
 ## Configuration
 
 ### Basic Configuration
+```toml
 Here’s an example `config.toml` file:
 ```toml
 baseURL = "/"
