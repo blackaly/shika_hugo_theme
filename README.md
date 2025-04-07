@@ -7,7 +7,6 @@
 - **Beautiful Design** - Clean, modern aesthetics with attention to typography and spacing
 - **Fully Responsive** - Looks perfect on all devices from mobile to desktop
 - **Customizable Home Page** - Showcase your content with various layouts
-- **Multi-language Support** - Built-in support for English and Arabic (RTL)
 - **Content Types** - Optimized templates for blog posts and tutorials
 - **Split-article Shortcode** - Create beautiful side-by-side content comparisons
 - **Fast Performance** - Optimized for speed and SEO
