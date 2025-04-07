@@ -1,0 +1,49 @@
+<section class="tutorial-series-container">
+    <h2 class="series-heading">Tutorial Series</h2>
+    <div class="series-grid">
+        {{ if isset $.Site.Data "tutorial_series" }}
+            {{ range $.Site.Data.tutorial_series }}
+            <div class="series-card">
+                <a href="{{ absURL (printf "tutorial-series/%s" .id) }}">
+                    {{ if .image }}
+                    <div class="series-image">
+                        <img src="{{ .image }}" alt="{{ .title }}" onerror="this.onerror=null;this.src='/img/default-post.jpg';">
+                    </div>
+                    {{ else }}
+                    <div class="series-image">
+                        <img src="/img/default-post.jpg" alt="{{ .title }}">
+                    </div>
+                    {{ end }}
+                    <div class="series-content">
+                        <h3 class="series-title">{{ .title }}</h3>
+                        <p class="series-description">{{ .description }}</p>
+                        <span class="series-count">{{ len .tutorials }} tutorials</span>
+                    </div>
+                </a>
+            </div>
+            {{ end }}
+        {{ else }}
+            <div class="no-series">
+                <h3>No tutorial series available</h3>
+                <p>Please check back later for new tutorial series.</p>
+            </div>
+        {{ end }}
+    </div>
+</section>
+
+<style>
+.no-series {
+    grid-column: 1 / -1;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    text-align: center;
+}
+
+.no-series h3 {
+    color: #00ffab;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+</style> 

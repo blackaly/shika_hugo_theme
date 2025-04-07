@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ absURL `css/style.css` }}">
+    <link rel="stylesheet" href="{{ absURL `css/tutorial-series.css` }}">
+    <link rel="stylesheet" href="{{ absURL `css/tags.css` }}">
+    <title>Browse by Tags</title>
+</head>
+<body>
+    <header>
+        <a href="{{ absURL `/` }}" class="back-link">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Back to home</span>
+        </a>
+        <div class="container">
+            <h1 class="bg-heading">Browse by Tags</h1>
+            <p class="tag-intro">Discover content organized by topics</p>
+        </div>
+        <hr class="line">
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="tags-overview">
+                <div class="popular-tags">
+                    <h2 class="section-title">Popular Tags</h2>
+                    <div class="tags-cloud">
+                        {{ range first 15 .Data.Terms.ByCount }}
+                        <a href="{{ .Page.RelPermalink }}" class="tag-bubble" style="--size: {{ div (math.Log (add 3 .Count)) 2 }};">
+                            <span class="tag-name">{{ .Page.Title }}</span>
+                            <span class="tag-number">{{ .Count }}</span>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                
+                <div class="all-tags">
+                    <h2 class="section-title">All Tags</h2>
+                    <div class="tag-grid">
+                        {{ range .Data.Terms.Alphabetical }}
+                        <a href="{{ .Page.RelPermalink }}" class="tag-item fade-in">
+                            <div class="tag-item-inner">
+                                <span class="tag-icon"><i class="fa-solid fa-tag"></i></span>
+                                <span class="tag-name">{{ .Page.Title }}</span>
+                                <span class="tag-count">{{ .Count }} {{ if eq .Count 1 }}post{{ else }}posts{{ end }}</span>
+                            </div>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade in animation for tags
+            const tags = document.querySelectorAll('.tag-item');
+            tags.forEach((tag, index) => {
+                tag.style.animationDelay = `${index * 0.05}s`;
+            });
+            
+            // Random subtle colors for tag bubbles
+            const tagBubbles = document.querySelectorAll('.tag-bubble');
+            const colors = [
+                'rgba(0, 255, 171, 0.15)',
+                'rgba(255, 123, 0, 0.15)',
+                'rgba(138, 43, 226, 0.15)',
+                'rgba(30, 144, 255, 0.15)',
+                'rgba(255, 215, 0, 0.15)',
+                'rgba(220, 20, 60, 0.15)',
+                'rgba(0, 128, 128, 0.15)',
+                'rgba(218, 112, 214, 0.15)'
+            ];
+            
+            tagBubbles.forEach(bubble => {
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                bubble.style.backgroundColor = randomColor;
+                bubble.style.borderColor = randomColor.replace('0.15', '0.3');
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ absURL `css/style.css`}}">
+    <link rel="stylesheet" href="{{ absURL `css/article.css` }}">
+    <link rel="stylesheet" href="{{ absURL `css/tutorial-series.css` }}">
+    <title>{{.Title}}</title>
+</head>
+<body>
+    <header>
+        <a href="{{ absURL `posts` }}" class="back-link">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Back to blog</span>
+        </a>
+        <div class="container">
+            <h1 class="bg-heading">{{.Title}}</h1>
+            <div class="article-meta">
+                {{ if .Date }}
+                <p class="article-date">{{ .Date.Format "January 2, 2006" }}</p>
+                {{ end }}
+                {{ if .Params.tags }}
+                <div class="article-tags">
+                    {{ range .Params.tags }}
+                    <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            {{ if .Params.image }}
+            <div class="article-banner">
+                <img src="{{ .Params.image }}" alt="{{ .Title }}">
+            </div>
+            {{ end }}
+        </div>
+        <hr class="line">
+    </header>
+    <main>
+        <div class="main-container">
+            <article class="full-article fade-in">
+                {{ .Content }}
+            
+                {{ if eq .Section "posts" }}
+                <div class="tutorial-navigation">
+                    {{ $pages := where .Site.RegularPages "Section" .Section }}
+                    {{ $currentIndex := 0 }}
+                    {{ range $index, $page := $pages }}
+                        {{ if eq $page.Permalink $.Permalink }}
+                            {{ $currentIndex = $index }}
+                        {{ end }}
+                    {{ end }}
+
+                    <div class="tutorial-nav-links">
+                        {{ if gt $currentIndex 0 }}
+                        {{ $prevPage := index $pages (sub $currentIndex 1) }}
+                        <a href="{{ $prevPage.Permalink }}" class="prev-tutorial">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Previous: {{ $prevPage.Title }}</span>
+                        </a>
+                        {{ end }}
+
+                        {{ if lt $currentIndex (sub (len $pages) 1) }}
+                        {{ $nextPage := index $pages (add $currentIndex 1) }}
+                        <a href="{{ $nextPage.Permalink }}" class="next-tutorial">
+                            <span>Next: {{ $nextPage.Title }}</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </article>
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation for content
+            setTimeout(function() {
+                document.querySelector('.fade-in').classList.add('active');
+            }, 100);
+        });
+    </script>
+</body>
+</html> 

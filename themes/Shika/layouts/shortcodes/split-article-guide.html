@@ -1,0 +1,45 @@
+<div class="usage-guide">
+    <h3>How to Use Split Article with Connector</h3>
+    
+    <p>Use the <code>split-article</code> shortcode to create a side-by-side comparison with a connector note:</p>
+    
+    <pre><code>&#123;&#123;&lt; split-article 
+    left="## Left Section Content
+    
+This is the content for the left section.
+    
+* Point 1
+* Point 2"
+    
+    right="## Right Section Content
+    
+This is the content for the right section.
+    
+1. Step one
+2. Step two"
+    
+    leftPoint="Left section key point"
+    rightPoint="Right section key point"
+    note="**Important connection:** This note highlights the relationship between both sections."
+    showConnector="true"
+    direction="horizontal" &gt;&#125;&#125;</code></pre>
+    
+    <h4>Parameters:</h4>
+    <ul>
+        <li><code>left</code> - Content for the left section (supports Markdown)</li>
+        <li><code>right</code> - Content for the right section (supports Markdown)</li>
+        <li><code>leftPoint</code> - Brief label for the left connection point</li>
+        <li><code>rightPoint</code> - Brief label for the right connection point</li>
+        <li><code>note</code> - The connector note text (supports Markdown)</li>
+        <li><code>showConnector</code> - Set to "true" or "false" to show/hide the connector</li>
+        <li><code>direction</code> - Either "horizontal" (default) or "vertical"</li>
+    </ul>
+    
+    <h4>Vertical Layout Example:</h4>
+    
+    <pre><code>&#123;&#123;&lt; split-article
+    left="Top section content"
+    right="Bottom section content"
+    direction="vertical"
+    note="This connects the top and bottom sections" &gt;&#125;&#125;</code></pre>
+</div> 

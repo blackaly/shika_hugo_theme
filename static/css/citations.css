@@ -1,0 +1,114 @@
+/* Margin citation styling */
+.citation-wrapper {
+  position: relative;
+  display: inline;
+}
+
+.citation-ref {
+  color: var(--primary-color, #00ffab);
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+  text-decoration: none;
+  z-index: 1;
+  border-bottom: 1px dashed var(--primary-color, #00ffab);
+  padding-bottom: 1px;
+}
+
+.citation-ref:hover {
+  background-color: rgba(0, 255, 171, 0.1);
+}
+
+.citation-details {
+  position: absolute;
+  right: -320px;
+  width: 280px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  background: rgba(20, 20, 20, 0.95);
+  border-left: 3px solid var(--primary-color, #00ffab);
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  top: -20px;
+  z-index: 1000;
+}
+
+.citation-details::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid rgba(20, 20, 20, 0.95);
+}
+
+.citation-header {
+  background-color: rgba(0, 255, 171, 0.15);
+  color: var(--primary-color, #00ffab);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 255, 171, 0.2);
+  font-size: 0.9rem;
+}
+
+.citation-content {
+  padding: 1rem;
+}
+
+.citation-details a {
+  color: var(--primary-color, #00ffab);
+  word-break: break-all;
+  font-size: 0.8rem;
+}
+
+.citation-details em {
+  color: #fff;
+  font-style: italic;
+}
+
+/* Structure for margin notes */
+.main-container {
+  position: relative;
+  max-width: 100%;
+  overflow: visible;
+  padding: 0 20px;
+}
+
+.full-article {
+  position: relative;
+  max-width: 650px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: visible;
+  z-index: 1;
+}
+
+.article-content {
+  position: relative;
+  overflow: visible;
+}
+
+@media (max-width: 1200px) {
+  .citation-details {
+    position: absolute;
+    right: -20px;
+    width: 250px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .citation-details {
+    display: none;
+  }
+  
+  .citation-ref:hover .citation-details,
+  .citation-ref:active .citation-details {
+    display: none;
+  }
+} 

@@ -1,7 +1,74 @@
+{{- $cssBase := resources.Get "css/style.css" -}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ absURL `/css/reset.css` }}">
     <link rel="stylesheet" href="{{ absURL `/css/style.css` }}">
-    <title>Mashally's Blog</title>
+    <link rel="stylesheet" href="{{ absURL `/css/utilities.css` }}">
+    
+    {{ if eq .Section "posts" }}
+    <link rel="stylesheet" href="{{ absURL `/css/list_article.css` }}">
+    {{ end }}
+    
+    {{ if eq .Section "tutorials" }}
+    <link rel="stylesheet" href="{{ absURL `/css/list_article.css` }}">
+    {{ end }}
+    
+    {{ if eq .Kind "page" }}
+    <link rel="stylesheet" href="{{ absURL `/css/article.css` }}">
+    <link rel="stylesheet" href="{{ absURL `/css/split-article.css` }}">
+    <link rel="stylesheet" href="{{ absURL `/css/citations.css` }}">
+    {{ end }}
+    
+    <!-- Arabic font support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    
+    {{ if eq .Lang "ar" }}
+    <link rel="stylesheet" href="{{ absURL `/css/rtl.css` }}">
+    {{ end }}
+    
+    <!-- Preload critical images -->
+    <script>
+        // Preload default image
+        const defaultImg = new Image();
+        defaultImg.src = '/img/default-post.jpg';
+        
+        // Function to preload images
+        function preloadImages(urls) {
+            urls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+        
+        // List of critical images to preload
+        const criticalImages = [
+            '/img/default-post.jpg'
+        ];
+        
+        // Preload critical images
+        preloadImages(criticalImages);
+    </script>
+    
+    <!-- Ensure images are displayed properly -->
+    <style>
+        .article-image {
+            position: relative !important;
+            overflow: hidden !important;
+            display: block !important;
+        }
+        
+        .article-image img {
+            width: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
 </head>

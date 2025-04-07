@@ -1,0 +1,323 @@
+{{ define "main" }}
+<div class="home-container">
+    <div class="hero-section">
+        {{- partial "language-switcher.html" . -}}
+        
+        <div class="hero-content">
+            <h1 class="hero-title">
+                {{ if eq .Site.Language.Lang "ar" }}
+                قالب شيكا - تصميم هوجو حديث
+                {{ else }}
+                Shika Theme - Modern Hugo Design
+                {{ end }}
+            </h1>
+            
+            <p class="hero-subtitle">
+                {{ if eq .Site.Language.Lang "ar" }}
+                قالب عصري ومتميز لمدونات ومواقع Hugo
+                {{ else }}
+                A modern and elegant theme for Hugo blogs and websites
+                {{ end }}
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="{{ .Site.Home.GetPage "/posts" | relLangURL }}" class="hero-button primary">
+                    {{ if eq .Site.Language.Lang "ar" }}
+                    تصفح المقالات
+                    {{ else }}
+                    Browse Posts
+                    {{ end }}
+                </a>
+                <a href="{{ .Site.Home.GetPage "/tutorials" | relLangURL }}" class="hero-button secondary">
+                    {{ if eq .Site.Language.Lang "ar" }}
+                    استكشف الدروس
+                    {{ else }}
+                    Explore Tutorials
+                    {{ end }}
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <section class="featured-section">
+        <h2 class="section-title">
+            {{ if eq .Site.Language.Lang "ar" }}
+            آخر المقالات
+            {{ else }}
+            Latest Posts
+            {{ end }}
+        </h2>
+        
+        <div class="featured-posts">
+            {{ $postPages := where .Site.RegularPages "Section" "posts" }}
+            {{ range first 3 $postPages }}
+            <a href="{{ .RelPermalink }}" class="featured-card">
+                <div class="card-image">
+                    {{ if .Params.image }}
+                    <img src="{{ .Params.image }}" alt="{{ .Title }}" onerror="this.onerror=null;this.src='/img/default-post.jpg';">
+                    {{ else }}
+                    <img src="/img/default-post.jpg" alt="{{ .Title }}">
+                    {{ end }}
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <p class="card-excerpt">{{ .Summary | plainify | truncate 100 }}</p>
+                </div>
+            </a>
+            {{ end }}
+        </div>
+    </section>
+    
+    <section class="featured-section tutorials-section">
+        <h2 class="section-title">
+            {{ if eq .Site.Language.Lang "ar" }}
+            أحدث الدروس
+            {{ else }}
+            Latest Tutorials
+            {{ end }}
+        </h2>
+        
+        <div class="featured-posts">
+            {{ $tutorialPages := where .Site.RegularPages "Section" "tutorials" }}
+            {{ range first 3 $tutorialPages }}
+            <a href="{{ .RelPermalink }}" class="featured-card">
+                <div class="card-image">
+                    {{ if .Params.image }}
+                    <img src="{{ .Params.image }}" alt="{{ .Title }}" onerror="this.onerror=null;this.src='/img/default-post.jpg';">
+                    {{ else }}
+                    <img src="/img/default-post.jpg" alt="{{ .Title }}">
+                    {{ end }}
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">{{ .Title }}</h3>
+                    <p class="card-excerpt">{{ .Summary | plainify | truncate 100 }}</p>
+                </div>
+            </a>
+            {{ end }}
+        </div>
+    </section>
+</div>
+
+<style>
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.hero-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 4rem 1rem;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #00ffab, #00a3ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.hero-button.primary {
+    background: linear-gradient(135deg, #00ffab, #00a3ff);
+    color: #121212;
+    box-shadow: 0 4px 15px rgba(0, 255, 171, 0.3);
+}
+
+.hero-button.secondary {
+    background-color: transparent;
+    color: #00ffab;
+    border: 2px solid #00ffab;
+}
+
+.hero-button.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 171, 0.4);
+}
+
+.hero-button.secondary:hover {
+    background-color: rgba(0, 255, 171, 0.1);
+    transform: translateY(-3px);
+}
+
+.featured-section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00ffab, transparent);
+    border-radius: 3px;
+}
+
+.featured-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.featured-card {
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 171, 0.15);
+    border-color: rgba(0, 255, 171, 0.3);
+}
+
+.card-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.featured-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(18, 18, 18, 1), transparent);
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.featured-card:hover .card-title {
+    color: #00ffab;
+}
+
+.card-excerpt {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+.tutorials-section {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5rem 0;
+    margin-top: 2rem;
+    border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+    .featured-posts {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* RTL Support */
+html[lang="ar"] .featured-posts {
+    direction: rtl;
+}
+
+html[lang="ar"] .card-excerpt {
+    text-align: right;
+}
+
+html[lang="ar"] .card-title {
+    text-align: right;
+}
+</style>
+{{ end }} 

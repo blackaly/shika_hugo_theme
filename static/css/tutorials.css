@@ -1,4 +1,5 @@
-i {
+/* Only rotate specific icons, not all i elements */
+.back-link i {
     transform: rotate(180deg);
 }
 

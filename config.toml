@@ -1,28 +1,77 @@
 baseURL = "/"
-languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = 'Shika'
-contentDir = "content"
-publishDir = "public"
+languageCode = "en-us"
+title = "Shika Theme"
+theme = "Shika"
 
+# Default content language
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+# Enable multiple languages
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    title = "Shika Theme"
+    description = "A modern and elegant Hugo theme"
+    contentDir = "content/en"
+    [languages.en.params]
+      languageDirection = "ltr"
+  
+  [languages.ar]
+    languageName = "العربية"
+    weight = 2
+    title = "قالب شيكا"
+    description = "قالب هوجو حديث وأنيق"
+    contentDir = "content/ar"
+    [languages.ar.params]
+      languageDirection = "rtl"
+
+# Site parameters
+[params]
+  author = "Shika"
+  description = "A modern and elegant Hugo theme"
+  mainSections = ["posts", "tutorials"]
+  
+  # Social media
+  github = "https://github.com/"
+  twitter = "https://twitter.com/"
+  linkedin = "https://linkedin.com/in/"
+
+# Menu 
 [menu]
   [[menu.main]]
     name = "Home"
     url = "/"
     weight = 1
-   [[menu.main]]
-    name = "Articles"
-    url = "posts/"
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
     weight = 2
   [[menu.main]]
     name = "Tutorials"
-    url = "tutorials/"
+    url = "/tutorials/"
     weight = 3
   [[menu.main]]
     name = "Gallary"
-    url = "gallary/"
+    url = "/Gallary/"
     weight = 4
   [[menu.main]]
     name = "Tags"
-    url = "tags/"
+    url = "/tags/"
     weight = 5
+
+# Arabic menu
+[languages.ar.menu]
+  [[languages.ar.menu.main]]
+    name = "الرئيسية"
+    url = "/ar/"
+    weight = 1
+  [[languages.ar.menu.main]]
+    name = "المقالات"
+    url = "/ar/posts/"
+    weight = 2
+  [[languages.ar.menu.main]]
+    name = "الدروس"
+    url = "/ar/tutorials/"
+    weight = 3

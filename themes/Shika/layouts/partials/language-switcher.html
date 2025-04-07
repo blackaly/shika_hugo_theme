@@ -1,0 +1,64 @@
+<div class="language-switcher">
+    {{ range .Site.Home.AllTranslations }}
+    <a href="{{ .Permalink }}" class="{{ if eq .Language.Lang $.Site.Language.Lang }}active{{ end }}">
+        {{ if eq .Language.Lang "ar" }}
+        <span class="lang-name">العربية</span>
+        {{ else if eq .Language.Lang "en" }}
+        <span class="lang-name">English</span>
+        {{ else }}
+        <span class="lang-name">{{ .Language.LanguageName }}</span>
+        {{ end }}
+    </a>
+    {{ end }}
+</div>
+
+<style>
+    .language-switcher {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 100;
+        display: flex;
+        gap: 0.5rem;
+        background-color: rgba(18, 18, 18, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 30px;
+        padding: 0.3rem;
+    }
+    
+    html[lang="ar"] .language-switcher {
+        right: auto;
+        left: 1.5rem;
+    }
+    
+    .language-switcher a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        padding: 0.3rem 0.8rem;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+    
+    .language-switcher a:hover {
+        color: #00ffab;
+    }
+    
+    .language-switcher a.active {
+        background-color: #00ffab;
+        color: #121212;
+        font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+        .language-switcher {
+            top: 1rem;
+            right: 1rem;
+        }
+        
+        html[lang="ar"] .language-switcher {
+            left: 1rem;
+        }
+    }
+</style> 

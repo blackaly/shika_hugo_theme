@@ -1,72 +1,115 @@
+/* Modern CSS Reset */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set core body defaults */
 body {
-	margin: 0;
-	
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* For modern browsers */
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove list styles by default */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Set default link style */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Base styles for common elements */
+p {
+  margin-bottom: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, li, a, i {
+  color: white;
+}
+
+/* Default styles for <i> elements */
+i {
+  display: inline-block;
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;  /* Width of scrollbar */
+  width: 8px;
 }
 
-/* Track (background of scrollbar) */
 ::-webkit-scrollbar-track {
-  background: #111;  /* Dark grey to blend with black background */
+  background: #111;
   border-radius: 10px;
 }
 
-/* Scrollbar thumb (draggable part) */
 ::-webkit-scrollbar-thumb {
-  background: #444;  /* Slightly lighter grey */
+  background: #444;
   border-radius: 10px;
 }
 
-/* Hover effect on scrollbar thumb */
 ::-webkit-scrollbar-thumb:hover {
-  background: #666;  /* Lighter grey on hover */
+  background: #666;
 }
 
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: #444 #111;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-h1,
-h2,
-h3,
-p,
-li,
-a {
-  margin: 0;
-  color: white;
-  line-height: 1.7;
-  letter-spacing: 1.2px;
-
-}
-
-
-img {
-    max-width: 100%;
-	max-height: 100%;
-    display: block;
-}
-
-i
-{
-    color: white;
 }

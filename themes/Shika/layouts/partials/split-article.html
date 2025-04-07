@@ -1,0 +1,19 @@
+{{ $leftContent := .leftContent | default "<p>Left section content goes here.</p>" }}
+{{ $rightContent := .rightContent | default "<p>Right section content goes here.</p>" }}
+{{ $connector := .connector }}
+
+<div class="split-article">
+    <div class="split-container">
+        <div class="split-section left-section">
+            {{ $leftContent | safeHTML }}
+        </div>
+        
+        <div class="split-section right-section">
+            {{ $rightContent | safeHTML }}
+        </div>
+    </div>
+    
+    {{ if $connector }}
+    {{ partial "connector.html" $connector }}
+    {{ end }}
+</div> 

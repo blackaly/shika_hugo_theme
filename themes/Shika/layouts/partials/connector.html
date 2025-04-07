@@ -1,0 +1,26 @@
+{{ $leftPoint := .leftPoint | default "Left section content" }}
+{{ $rightPoint := .rightPoint | default "Right section content" }}
+{{ $note := .note | default "This connects both sections" }}
+{{ $direction := .direction | default "horizontal" }}
+
+<div class="content-connector {{ $direction }}-connector">
+    <div class="connector-lines">
+        <div class="connector-line left-line"></div>
+        <div class="connector-line right-line"></div>
+    </div>
+    <div class="connector-note">
+        <div class="note-content">
+            {{ $note | markdownify }}
+        </div>
+        <div class="connected-points">
+            <div class="connected-point left-point">
+                <i class="fa-solid fa-circle-arrow-left"></i>
+                <span>{{ $leftPoint }}</span>
+            </div>
+            <div class="connected-point right-point">
+                <span>{{ $rightPoint }}</span>
+                <i class="fa-solid fa-circle-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+</div> 

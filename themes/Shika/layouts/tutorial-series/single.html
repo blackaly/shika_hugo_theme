@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ absURL `css/style.css` }}">
+    <link rel="stylesheet" href="{{ absURL `css/tutorial-series.css` }}">
+    <title>{{ .Title }} - Tutorial Series</title>
+</head>
+<body>
+    <header>
+        <a href="{{ absURL `tutorials` }}" class="back-link">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Back to tutorials</span>
+        </a>
+        <div class="container">
+            {{ $seriesId := .Params.series_id }}
+            {{ range $.Site.Data.tutorial_series }}
+                {{ if eq .id $seriesId }}
+                    <h1 class="bg-heading">{{ .title }}</h1>
+                    <p class="series-description">{{ .description }}</p>
+                    {{ if .image }}
+                    <div class="series-banner">
+                        <img src="{{ .image }}" alt="{{ .title }}">
+                    </div>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        </div>
+        <hr class="line">
+    </header>
+    <main>
+        <div class="main-container">
+            <section class="tutorials-list">
+                {{ $seriesId := .Params.series_id }}
+                {{ range $.Site.Data.tutorial_series }}
+                    {{ if eq .id $seriesId }}
+                        <h2 class="tutorials-heading">Tutorials in this series</h2>
+                        <div class="series-progress">
+                            <div class="progress-bar">
+                                <div class="progress-line"></div>
+                            </div>
+                        </div>
+                        <div class="tutorials-grid">
+                            {{ range $index, $tutorialPath := .tutorials }}
+                                {{ with $.Site.GetPage $tutorialPath }}
+                                <div class="tutorial-card fade-in">
+                                    <span class="tutorial-number">{{ add $index 1 }}</span>
+                                    <a href="{{ .RelPermalink }}">
+                                        <div class="tutorial-content">
+                                            <h3 class="tutorial-title">{{ .Title }}</h3>
+                                            {{ if .PublishDate }}
+                                            <p class="tutorial-date">{{ .Date.Format "January 2, 2006" }}</p>
+                                            {{ else }}
+                                            <p class="tutorial-date">Unknown</p>
+                                            {{ end }}
+                                            <p class="tutorial-summary">{{ .Content | strings.Truncate 120 | plainify | safeHTML }}</p>
+                                            <span class="read-more">Read tutorial <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; margin-left: 4px;"></i></span>
+                                        </div>
+                                    </a>
+                                </div>
+                                {{ end }}
+                            {{ end }}
+                        </div>
+                    {{ end }}
+                {{ end }}
+            </section>
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to tutorial cards
+            const cards = document.querySelectorAll('.tutorial-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.15}s`;
+            });
+        });
+    </script>
+</body>
+</html> 

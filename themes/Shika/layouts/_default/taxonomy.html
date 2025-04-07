@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ absURL `css/style.css` }}">
+    <link rel="stylesheet" href="{{ absURL `css/tutorial-series.css` }}">
+    <link rel="stylesheet" href="{{ absURL `css/tags.css` }}">
+    <title>{{ .Title }} - Tags</title>
+</head>
+<body>
+    <header>
+        <a href="{{ absURL `tags` }}" class="back-link">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Back to all tags</span>
+        </a>
+        <div class="container">
+            <div class="tag-header">
+                <span class="tag-icon"><i class="fa-solid fa-tag"></i></span>
+                <h1 class="bg-heading">{{ .Title }}</h1>
+                <p class="tag-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</p>
+            </div>
+        </div>
+        <hr class="line">
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="tag-content-grid">
+                {{ range .Pages }}
+                <div class="tag-card fade-in">
+                    {{ if .Params.image }}
+                    <div class="card-image">
+                        <img src="{{ .Params.image }}" alt="{{ .Title }}">
+                    </div>
+                    {{ end }}
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="card-date">{{ .Date.Format "January 2, 2006" }}</span>
+                            <span class="content-type">{{ if eq .Section "tutorials" }}Tutorial{{ else }}Article{{ end }}</span>
+                        </div>
+                        <h3 class="card-title">{{ .Title }}</h3>
+                        <p class="card-excerpt">{{ .Summary | plainify | safeHTML }}</p>
+                        <div class="card-footer">
+                            <a href="{{ .RelPermalink }}" class="read-more">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                            
+                            {{ if .Params.tags }}
+                            <div class="card-tags">
+                                {{ range first 2 .Params.tags }}
+                                <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade in animation for cards
+            const cards = document.querySelectorAll('.tag-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.15}s`;
+            });
+        });
+    </script>
+</body>
+</html> 

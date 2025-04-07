@@ -1,0 +1,13 @@
+{{ $refNum := .Get "num" }}
+{{ $authors := .Get "authors" }}
+{{ $title := .Get "title" }}
+{{ $details := .Get "details" }}
+{{ $link := .Get "link" }}
+
+<span class="citation-ref">[{{ $refNum }}]</span>
+<div class="citation-details">
+  <div class="citation-header">Reference {{ $refNum }}</div>
+  <div class="citation-content">
+    {{ $authors }}, <em>{{ $title }}</em>, {{ $details }} {{ if $link }}<a href="{{ $link }}" target="_blank">{{ $link }}</a>{{ end }}
+  </div>
+</div> 

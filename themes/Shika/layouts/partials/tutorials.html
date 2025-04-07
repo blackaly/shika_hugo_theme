@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+{{- partial "head.html" . -}}
+<body>
+    <header>
+        <a href="{{ absURL `/` }}" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to home</span>
+        </a>
+        <div class="container">
+            <h1 class="bg-heading">{{ .Title }}</h1>
+            <p class="tutorials-intro">Find tutorials and learning paths organized by topic</p>
+        </div>
+        <hr class="line">
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="tutorials-navigation">
+                <a href="#series" class="active">Tutorial Series</a>
+                <a href="#individual">Individual Tutorials</a>
+            </div>
+
+            <div id="series" class="tutorials-section">
+                {{- partial "tutorial_series.html" . -}}
+            </div>
+
+            <div id="individual" class="tutorials-section" style="display: none;">
+                <h2 class="section-heading">Individual Tutorials</h2>
+                {{- partial "list_tut.html" . -}}
+            </div>
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.tutorials-navigation a');
+            const sections = document.querySelectorAll('.tutorials-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    // Update active link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target section, hide others
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.style.display = 'block';
+                            // Small delay to trigger fade-in effect
+                            setTimeout(() => {
+                                section.style.opacity = 1;
+                            }, 50);
+                        } else {
+                            section.style.opacity = 0;
+                            // Wait for fade out before hiding
+                            setTimeout(() => {
+                                section.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Initialize sections
+            sections.forEach(section => {
+                if (section.style.display !== 'none') {
+                    section.style.opacity = 1;
+                } else {
+                    section.style.opacity = 0;
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

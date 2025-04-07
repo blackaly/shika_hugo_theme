@@ -1,8 +1,9 @@
 ---
 title: The Evolution of Technology Shaping the Future
 date: 2023-12-29T11:43:54-05:00
-image: /img/1.jpeg
+image: img/default-post.jpg
 draft: true
+tags: ["technology", "future", "ai", "digital"]
 ---
 
 # _</u>The Evolution of Technology: Shaping the Future<u>_
@@ -62,10 +63,20 @@ The commercialization of space exploration is opening up new possibilities for h
 
 ## 4. **The Impact of Technology on Society**
 
-### Positive Impacts
+{{< split-article 
+left=`### Positive Impacts
 - **Improved Communication**: Technology has made it easier to connect with people across the globe.
 - **Enhanced Education**: Online learning platforms and digital tools are making education more accessible.
-- **Economic Growth**: Technology drives innovation, creates jobs, and boosts productivity.
+- **Economic Growth**: Technology drives innovation, creates jobs, and boosts productivity.`
+
+right=`### Negative Impacts
+- **Digital Divide**: Not everyone has equal access to technology, creating inequality.
+- **Privacy Concerns**: Data collection and surveillance raise serious privacy issues.
+- **Job Displacement**: Automation and AI may replace certain jobs and create unemployment.`
+
+leftPoint="Benefits of technology" 
+rightPoint="Challenges of technology"
+note="Finding balance is key" >}}
 
 ## how make love
 
@@ -275,15 +286,11 @@ int main() {
 
  ```
 
-### Challenges
-- **Privacy Concerns**: The widespread use of technology has raised concerns about data privacy and security.
-- **Job Displacement**: Automation and AI are replacing certain jobs, leading to unemployment in some sectors.
-- **Digital Divide**: Not everyone has equal access to technology, creating disparities in opportunities.
-
 ---
 
 ## 5. **Conclusion**
 
+{{< cite num="5" authors="Zhang, L., Brown, S., & Martinez, A." title="Remote Work Productivity in Post-Pandemic Environments" details="Journal of Organizational Behavior, 2023, 12(3), 87-104" >}}
 Technology is a powerful force that continues to shape our world. While it brings numerous benefits, it also presents challenges that need to be addressed. As we move forward, it is essential to harness the potential of technology responsibly and ensure that its benefits are accessible to all. The future of technology is bright, and its possibilities are limitless. By embracing innovation and fostering collaboration, we can create a better and more sustainable future for generations to come.
 
 ---

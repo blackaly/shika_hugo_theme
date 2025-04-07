@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{{- partial "head.html" . -}}
+<body>
+    <header>
+        <a href="{{ absURL `/` }}" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to home</span>
+        </a>
+        <div class="container">
+            <h1 class="bg-heading">{{ .Title }}</h1>
+            <p class="tutorials-intro">Find tutorials and learning paths organized by topic</p>
+        </div>
+        <hr class="line">
+    </header>
+    <main>
+        <div class="main-container">
+            {{- partial "list_tut.html" . -}}
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+</body>
+</html> 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+{{- partial "head.html" . -}}
+<body>
+    <header>
+        <a href="{{ absURL `/` }}" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to home</span>
+        </a>
+        <div class="container">
+            <h1 class="bg-heading">{{ .Title }}</h1>
+            <p class="tutorials-intro">Explore our latest articles, thoughts, and insights</p>
+        </div>
+        <hr class="line">
+    </header>
+    <main>
+        <div class="main-container">
+            {{- partial "list_articles.html" . -}}
+        </div>
+    </main>
+    {{- partial "footer.html" . -}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fix images and handle card animations
+            console.log("DOM content loaded, initializing posts page scripts");
+            
+            // Show back button icon
+            const backIcon = document.querySelector('.back-link i');
+            if (backIcon) {
+                backIcon.style.display = 'inline-block';
+            }
+            
+            // Force image loading for all articles
+            const articleImages = document.querySelectorAll('.article-image img');
+            console.log(`Found ${articleImages.length} article images to load`);
+            
+            articleImages.forEach((img, index) => {
+                // Add a default error handler
+                img.onerror = function() {
+                    console.log(`Error loading image ${index}, setting default`);
+                    this.onerror = null;
+                    this.src = '/img/default-post.jpg';
+                };
+                
+                // Force reload the image with a timestamp
+                const originalSrc = img.getAttribute('src');
+                if (originalSrc) {
+                    console.log(`Reloading image ${index}: ${originalSrc}`);
+                    // Small delay to ensure DOM is ready
+                    setTimeout(() => {
+                        img.src = originalSrc + '?v=' + new Date().getTime();
+                    }, 100 + (index * 50));
+                } else {
+                    img.src = '/img/default-post.jpg';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

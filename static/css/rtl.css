@@ -1,0 +1,119 @@
+/* RTL Support for Arabic Language */
+html[lang="ar"] {
+    direction: rtl;
+    font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif;
+}
+
+/* Reverse the layout for RTL languages */
+html[lang="ar"] .back-link {
+    left: auto;
+    right: 1.5rem;
+}
+
+html[lang="ar"] .back-link:hover {
+    transform: translateX(5px);
+}
+
+html[lang="ar"] .back-link i {
+    transform: rotate(180deg);
+    margin-right: 0;
+    margin-left: 0.3rem;
+}
+
+/* Fix header elements for RTL */
+html[lang="ar"] .bg-heading::after {
+    right: 50%;
+    transform: translateX(50%);
+}
+
+/* Fix article card layout */
+html[lang="ar"] .card-content-wrapper {
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .image-gradient {
+    background: linear-gradient(270deg, rgba(18, 18, 18, 0) 0%, rgba(18, 18, 18, 0.8) 100%) !important;
+}
+
+/* Fix meta elements */
+html[lang="ar"] .article-meta {
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .meta-item {
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .article-tags {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+/* Make tags look correct in RTL mode */
+html[lang="ar"] .article-tag {
+    text-align: right;
+}
+
+/* Fix read more elements */
+html[lang="ar"] .read-more {
+    flex-direction: row-reverse;
+}
+
+html[lang="ar"] .read-more::after {
+    right: 0;
+    left: auto;
+    background: linear-gradient(270deg, #00ffab, transparent);
+}
+
+html[lang="ar"] .article-card:hover .read-more i {
+    transform: translateX(-5px);
+}
+
+/* Fix featured tag position */
+html[lang="ar"] .featured-post-tag {
+    right: auto;
+    left: 1rem;
+}
+
+/* Fix filter button position */
+html[lang="ar"] .post-filters {
+    flex-direction: row-reverse;
+}
+
+/* Make sure animation works correctly in RTL */
+@keyframes rtl-fadeIn {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+html[lang="ar"] .article-card.visible {
+    animation: rtl-fadeIn 0.5s ease forwards;
+}
+
+/* Fix tutorial number position */
+html[lang="ar"] .tutorial-number {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    html[lang="ar"] .back-link {
+        right: 1rem;
+    }
+    
+    html[lang="ar"] .image-gradient {
+        background: linear-gradient(0deg, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0) 100%) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    html[lang="ar"] .back-link {
+        right: 1rem;
+    }
+    
+    html[lang="ar"] .article-meta {
+        align-items: flex-end;
+    }
+} 

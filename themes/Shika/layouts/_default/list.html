@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ absURL `css/style.css` }}">
-    <link rel="stylesheet" href="{{ absURL `css/list_article.css` }}">
-    <title>Posts</title>
-</head>
+{{- partial "head.html" . -}}
 <body>
     <header>
-        <a href="{{ absURL `index.html` }}">
-            <i class="fa-solid fa-arrow-right"></i>
-            Back to home
+        <a href="{{ absURL `/` }}" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to home</span>
         </a>
         <div class="container">
-                <h1 class="bg-heading">{{ .Title }}</h1>
+            <h1 class="bg-heading">{{ .Title }}</h1>
+            <p class="subtitle">Explore our latest articles, thoughts, and insights</p>
         </div>
-        <hr class="line">
     </header>
+    
     <main>
         <div class="main-container">
             {{ if eq .Section "posts" }}
@@ -28,7 +22,79 @@
             {{ end }}
         </div>
     </main>
+    
     {{- partial "footer.html" . -}}
 
+    <script>
+        // Fix images and handle card animations
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM content loaded, initializing scripts");
+            
+            // Show back button icon
+            const backIcon = document.querySelector('.back-link i');
+            if (backIcon) {
+                backIcon.style.display = 'inline-block';
+            }
+            
+            // Force image loading for all articles
+            function loadArticleImages() {
+                const articleImages = document.querySelectorAll('.article-image img');
+                console.log(`Found ${articleImages.length} article images to load`);
+                
+                articleImages.forEach((img, index) => {
+                    // Add a default error handler
+                    img.onerror = function() {
+                        console.log(`Error loading image ${index}, setting default`);
+                        this.onerror = null;
+                        this.src = '/img/default-post.jpg';
+                    };
+                    
+                    // Force reload the image with a timestamp
+                    const originalSrc = img.getAttribute('src');
+                    if (originalSrc) {
+                        console.log(`Reloading image ${index}: ${originalSrc}`);
+                        // Small delay to ensure DOM is ready
+                        setTimeout(() => {
+                            img.src = originalSrc + '?v=' + new Date().getTime();
+                        }, 100 + (index * 50));
+                    } else {
+                        img.src = '/img/default-post.jpg';
+                    }
+                    
+                    // Set explicit dimensions and display properties
+                    img.style.display = 'block';
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                });
+            }
+            
+            // Animate article cards
+            function animateCards() {
+                const cards = document.querySelectorAll('.article-card');
+                console.log(`Animating ${cards.length} cards`);
+                
+                cards.forEach((card, index) => {
+                    // Ensure card is visible
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    
+                    // Add delay based on position
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                        // Backup in case CSS animation fails
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 300 + (index * 100));
+                });
+            }
+            
+            // First load the images
+            loadArticleImages();
+            
+            // Then animate cards after images have had time to load
+            setTimeout(animateCards, 500);
+        });
+    </script>
 </body>
 </html>

@@ -1,21 +1,355 @@
-    <section class="article-container">
-        {{ range where .Site.RegularPages "Section" "posts" }}
-        <article >
-            <a href="{{ .RelPermalink  }}">
-            {{ if .Params.image }}
-                <img src="{{ .Params.image }}" alt="{{ .Title }}">                
-            {{ end }}      
-            <div class="content">
-               
-                    <h2 class="heading-1">{{ .Title }}</h2>
-                    {{ if .PublishDate  }}
-                    <p>{{ .Date.Format "January 2, 2006" }}</p>
-                    {{ else }}
-                    <p>Unkown</p>
-                    {{ end }}
-                    <p class="article-p">{{ .Content | strings.Truncate 70 | plainify | safeHTML }}</p>
-                </a>
+<div class="post-filter-container">
+    <div class="post-filters">
+        <button class="filter-button active" data-filter="all">All Posts</button>
+        <button class="filter-button" data-filter="featured">Featured</button>
+        <button class="filter-button" data-filter="recent">Recent Posts</button>
+    </div>
+</div>
+
+<section class="article-container">
+    {{ $postCount := 0 }}
+    {{ range where .Site.RegularPages "Section" "posts" }}
+    {{ $postCount = add $postCount 1 }}
+    <article class="article-card visible" data-categories="{{ range .Params.tags }}{{ . }} {{end}}">
+        <a href="{{ .RelPermalink }}" class="card-link">
+            <div class="card-inner">
+                {{ if .Params.featured }}
+                <div class="featured-post-tag"><i class="fa-solid fa-star"></i> Featured</div>
+                {{ end }}
+                
+                <div class="card-content-wrapper">
+                    <!-- Image container -->
+                    <div class="article-image">
+                        {{ if .Params.image }}
+                        <img src="{{ .Params.image }}" alt="{{ .Title }}" onerror="this.onerror=null;this.src='/img/default-post.jpg';">
+                        {{ else }}
+                        <img src="/img/default-post.jpg" alt="{{ .Title }}">
+                        {{ end }}
+                        <div class="image-gradient"></div>
+                    </div>
+                    
+                    <!-- Content container -->
+                    <div class="content">
+                        <div class="content-inner">
+                            <!-- Meta information at the top -->
+                            <div class="article-meta">
+                                {{ if .Date }}
+                                <div class="meta-item date">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+                                </div>
+                                {{ end }}
+                            </div>
+                            
+                            <!-- Title -->
+                            <h2 class="article-title">{{ .Title }}</h2>
+                            
+                            <!-- Tags below the title -->
+                            {{ if .Params.tags }}
+                            <div class="article-tags">
+                                {{ range first 3 .Params.tags }}
+                                <span class="article-tag">{{ . }}</span>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                            
+                            <!-- Summary -->
+                            <div class="article-summary">
+                                {{ if .Summary }}
+                                <p>{{ .Summary | plainify | truncate 120 }}</p>
+                                {{ else }}
+                                <p>{{ .Title }} - Click to read more about this topic.</p>
+                                {{ end }}
+                            </div>
+                            
+                            <!-- Footer with read more -->
+                            <div class="card-footer">
+                                <span class="read-more">Read article <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </article>
-        {{ end }}
-    </section>
+        </a>
+    </article>
+    {{ end }}
+    {{ if eq $postCount 0 }}
+    <div class="no-posts">
+        <h2>No posts found</h2>
+        <p>There are no posts available at this time.</p>
+    </div>
+    {{ end }}
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const articles = document.querySelectorAll('.article-card');
+        
+        // Check if there are any articles
+        if (articles.length === 0) {
+            const container = document.querySelector('.article-container');
+            if (!container.querySelector('.no-posts')) {
+                container.innerHTML = '<div class="no-posts"><h2>No posts found</h2><p>There are no posts available at this time.</p></div>';
+            }
+        } else {
+            // Force images to be shown by reloading them
+            articles.forEach(article => {
+                const img = article.querySelector('img');
+                if (img) {
+                    // Force image reload with a timestamp to bypass cache
+                    const originalSrc = img.getAttribute('src');
+                    if (originalSrc) {
+                        setTimeout(() => {
+                            img.src = originalSrc + '?v=' + new Date().getTime();
+                        }, 100);
+                    }
+                }
+            });
+            
+            // Log for debugging
+            console.log("Posts loaded: " + articles.length);
+        }
+        
+        // Filter function
+        function filterPosts(filter) {
+            let visibleCount = 0;
+            
+            articles.forEach(article => {
+                // Remove visible class first
+                article.classList.remove('visible');
+                
+                // Handle display and visibility
+                if (filter === 'all') {
+                    article.style.display = 'block';
+                    visibleCount++;
+                    setTimeout(() => article.classList.add('visible'), 50);
+                } else if (filter === 'featured') {
+                    if (article.querySelector('.featured-post-tag')) {
+                        article.style.display = 'block';
+                        visibleCount++;
+                        setTimeout(() => article.classList.add('visible'), 50);
+                    } else {
+                        article.style.display = 'none';
+                    }
+                } else if (filter === 'recent') {
+                    // Show only the 5 most recent posts
+                    const recentArticles = Array.from(articles).slice(0, 5);
+                    if (recentArticles.includes(article)) {
+                        article.style.display = 'block';
+                        visibleCount++;
+                        setTimeout(() => article.classList.add('visible'), 50);
+                    } else {
+                        article.style.display = 'none';
+                    }
+                }
+            });
+            
+            // If no posts are visible for the selected filter
+            setTimeout(() => {
+                if (visibleCount === 0) {
+                    const container = document.querySelector('.article-container');
+                    const noPostsMsg = document.createElement('div');
+                    noPostsMsg.className = 'no-posts';
+                    noPostsMsg.innerHTML = `<h2>No ${filter} posts found</h2><p>There are no posts available for this filter.</p>`;
+                    
+                    // Remove any existing no-posts message
+                    const existingMsg = container.querySelector('.no-posts');
+                    if (existingMsg) {
+                        container.removeChild(existingMsg);
+                    }
+                    
+                    container.appendChild(noPostsMsg);
+                } else {
+                    // Remove any existing no-posts message
+                    const existingMsg = document.querySelector('.no-posts');
+                    if (existingMsg) {
+                        existingMsg.parentNode.removeChild(existingMsg);
+                    }
+                }
+            }, 100);
+        }
+        
+        // Add click event to filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                // Apply filter
+                filterPosts(this.getAttribute('data-filter'));
+            });
+        });
+    });
+</script>
+
+<style>
+/* Article listing styling */
+.article-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.article-card {
+    margin-bottom: 2rem;
+}
+
+.card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.article-image {
+    margin-bottom: 1rem;
+}
+
+.article-image img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Renamed from article-content to article-card-content */
+.article-card-content {
+    padding: 0.5rem 0;
+}
+
+.article-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.card-link:hover .article-title {
+    color: #00ffab;
+}
+
+.article-date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.article-summary {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #00ffab;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+}
+
+.read-more i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.card-link:hover .read-more i {
+    transform: translateX(5px);
+}
+
+.article-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(0, 255, 171, 0.3), rgba(255, 255, 255, 0.1));
+    margin: 2rem 0;
+}
+
+.article-card:last-child .article-divider {
+    display: none;
+}
+
+.featured-post-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #00ffab;
+    color: #121212;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+/* Post filters */
+.post-filter-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.post-filters {
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.filter-button {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-button.active {
+    background-color: #00ffab;
+    color: #121212;
+    border-color: #00ffab;
+}
+
+.filter-button:hover:not(.active) {
+    background-color: rgba(0, 255, 171, 0.2);
+    border-color: rgba(0, 255, 171, 0.3);
+}
+
+.no-posts {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.no-posts h2 {
+    color: #00ffab;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .article-title {
+        font-size: 1.5rem;
+    }
+    
+    .article-image img {
+        max-height: 250px;
+    }
+    
+    .post-filters {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-title {
+        font-size: 1.3rem;
+    }
+    
+    .article-image img {
+        max-height: 200px;
+    }
+}
+</style> 

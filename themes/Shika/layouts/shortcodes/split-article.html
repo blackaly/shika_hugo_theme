@@ -1,0 +1,40 @@
+{{ $leftContent := .Get "left" | markdownify }}
+{{ $rightContent := .Get "right" | markdownify }}
+{{ $leftPoint := .Get "leftPoint" | default "Left section" }}
+{{ $rightPoint := .Get "rightPoint" | default "Right section" }}
+{{ $note := .Get "note" | markdownify }}
+{{ $direction := .Get "direction" | default "horizontal" }}
+
+<div class="split-article {{ if eq $direction "vertical" }}vertical-split{{ end }}">
+    <div class="split-container">
+        <div class="split-section left-section">
+            {{ $leftContent | safeHTML }}
+        </div>
+        
+        <div class="split-section right-section">
+            {{ $rightContent | safeHTML }}
+        </div>
+    </div>
+    
+    <div class="content-connector {{ $direction }}-connector">
+        <div class="connector-lines">
+            <div class="connector-line left-line"></div>
+            <div class="connector-line right-line"></div>
+        </div>
+        <div class="connector-note">
+            <div class="note-content">
+                {{ $note | safeHTML }}
+            </div>
+            <div class="connected-points">
+                <div class="connected-point left-point">
+                    <i class="fa-solid fa-circle-arrow-left"></i>
+                    <span>{{ $leftPoint }}</span>
+                </div>
+                <div class="connected-point right-point">
+                    <span>{{ $rightPoint }}</span>
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

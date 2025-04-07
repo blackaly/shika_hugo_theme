@@ -1,0 +1,127 @@
+/* Split Article Component Styles */
+.split-article {
+    position: relative;
+    margin: 3rem 0;
+    width: 100%;
+}
+
+.split-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.split-section {
+    flex: 1;
+    min-width: 280px;
+    background: var(--card-bg, rgba(255,255,255,0.05));
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.split-section h3 {
+    margin-top: 0;
+    color: var(--primary-color, #2d85c7);
+    border-bottom: 1px solid var(--border-color, rgba(125,125,125,0.2));
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.content-connector {
+    position: relative;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: var(--card-bg, rgba(255,255,255,0.05));
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 90%;
+}
+
+.connector-lines {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 60px);
+    pointer-events: none;
+}
+
+.connector-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color, #2d85c7) 0%, var(--secondary-color, #7252aa) 100%);
+    top: 30px;
+}
+
+.connector-line.left-line {
+    right: 50%;
+    width: 35%;
+}
+
+.connector-line.right-line {
+    left: 50%;
+    width: 35%;
+}
+
+.connected-points {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.connected-point {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color, #2d85c7);
+    font-weight: 500;
+}
+
+.note-content {
+    font-style: italic;
+    color: var(--text-color, #333);
+    line-height: 1.6;
+}
+
+/* Vertical Layout */
+.vertical-split .split-container {
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.vertical-connector .connector-line {
+    width: 2px;
+    height: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.vertical-connector .connector-line.left-line {
+    top: -35%;
+}
+
+.vertical-connector .connector-line.right-line {
+    top: auto;
+    bottom: -35%;
+}
+
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .connected-points {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .connector-line.left-line, 
+    .connector-line.right-line {
+        display: none;
+    }
+} 
