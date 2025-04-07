@@ -10,7 +10,6 @@ header a {
     z-index: 100;
 }
 
-
 header .container {
     padding: clamp(40vh, 10vw, 12rem);
     text-align: center;

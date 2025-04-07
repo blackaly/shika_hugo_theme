@@ -1,7 +1,7 @@
 /* Article and Content Styling */
 
 /* Back navigation styling */
-.back-link, header a {
+.back-link, .article-header a {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -12,6 +12,10 @@
     background-color: rgba(0,0,0,0.2);
     border-radius: 4px;
     transition: all 0.3s ease;
+}
+.highlight
+{
+    direction: ltr !important;
 }
 
 .back-link:hover, header a:hover {

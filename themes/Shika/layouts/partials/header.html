@@ -1,22 +1,17 @@
-<header>
-    <a href="{{ .Site.Home.RelPermalink }}" class="back-link">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>
-            {{ if eq .Site.Language.Lang "ar" }}
-            العودة للرئيسية
-            {{ else }}
-            Back to home
-            {{ end }}
-        </span>
-    </a>
-    
-    {{- partial "language-switcher.html" . -}}
-    
-    <div class="container">
-        <h1 class="bg-heading">{{ .Title }}</h1>
-        {{ if .Description }}
-        <p class="subtitle">{{ .Description }}</p>
-        {{ end }}
+<header class="site-header">
+    <div class="site-header-container">
+        <div class="site-logo">
+            <a href="{{ .Site.Home.GetPage `/` | relLangURL }}">
+                {{ .Site.Title }}
+            </a>
+        </div>
+        
+        <nav class="site-nav">
+            <ul>
+                {{ range .Site.Menus.main }}
+                <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+                {{ end }}
+            </ul>
+        </nav>
     </div>
-    <hr class="line">
 </header>

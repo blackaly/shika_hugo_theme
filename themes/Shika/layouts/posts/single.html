@@ -9,12 +9,17 @@
     <link rel="stylesheet" href="{{ absURL `css/tutorial-series.css` }}">
     <title>{{.Title}}</title>
 </head>
-<body>
+    {{ if eq .Language.Lang "ar" }}
+<body dir="rtl">
+{{ else }}
+<body dir="ltr">
+{{ end }}
     <header>
         <a href="{{ absURL `posts` }}" class="back-link">
             <i class="fa-solid fa-arrow-right"></i>
             <span>Back to blog</span>
         </a>
+        
         <div class="container">
             <h1 class="bg-heading">{{.Title}}</h1>
             <div class="article-meta">

@@ -1,65 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-{{- partial "head.html" . -}}
-<body>
-    <header>
-        <a href="{{ absURL `/` }}" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span>Back to home</span>
-        </a>
-        <div class="container">
-            <span class="tutorial-badge article-badge">Article</span>
-            <h1 class="bg-heading">{{.Title}}</h1>
-            {{ if .Date }}
-            <p class="article-date">{{ .Date.Format "January 2, 2006" }}</p>
-            {{ end }}
-        </div>
-        <hr class="line">
-    </header>
-    <main>
-        <div class="main-container">
-            {{ partial "article.html" . }}
-        </div>
-    </main>
-    {{- partial "footer.html" . -}}
+{{ define "main" }}
+<header>
+    
+    <a href="{{ .Site.Home.GetPage `/` | relLangURL }}" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to home</span>
+    </a>
+    <div class="container">
+        <span class="tutorial-badge article-badge">Article</span>
+        <h1 class="bg-heading">{{.Title}}</h1>
+        {{ if .Date }}
+        <p class="article-date">{{ .Date.Format "January 2, 2006" }}</p>
+        {{ end }}
+    </div>
+    <hr class="line">
+</header>
+<div class="main-container">
+    {{ partial "article.html" . }}
+    
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add animation for content
-            setTimeout(function() {
-                document.querySelector('.fade-in').classList.add('active');
-            }, 100);
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add animation for content
+        setTimeout(function() {
+            document.querySelector('.fade-in').classList.add('active');
+        }, 100);
+        
+        // Position margin citations
+        const citationRefs = document.querySelectorAll('.citation-ref');
+        
+        function positionCitations() {
+            // Skip positioning on small screens
+            if (window.innerWidth <= 1000) return;
             
-            // Position margin citations
-            const citationRefs = document.querySelectorAll('.citation-ref');
-            
-            function positionCitations() {
-                // Skip positioning on small screens
-                if (window.innerWidth <= 1000) return;
+            citationRefs.forEach(function(ref) {
+                // Get the next sibling which is the citation details
+                let citation = ref.nextElementSibling;
+                while (citation && !citation.classList.contains('citation-details')) {
+                    citation = citation.nextElementSibling;
+                }
                 
-                citationRefs.forEach(function(ref) {
-                    // Get the next sibling which is the citation details
-                    let citation = ref.nextElementSibling;
-                    while (citation && !citation.classList.contains('citation-details')) {
-                        citation = citation.nextElementSibling;
-                    }
+                if (citation) {
+                    // Get the position of the reference
+                    const refRect = ref.getBoundingClientRect();
                     
-                    if (citation) {
-                        // Get the position of the reference
-                        const refRect = ref.getBoundingClientRect();
-                        
-                        // Position the citation beside the reference
-                        citation.style.top = (window.pageYOffset + refRect.top - 20) + 'px';
-                        citation.style.display = 'block';
-                    }
-                });
-            }
-            
-            // Run initially and on scroll/resize
-            positionCitations();
-            window.addEventListener('scroll', positionCitations);
-            window.addEventListener('resize', positionCitations);
-        });
-    </script>
-</body>
-</html>
+                    // Position the citation beside the reference
+                    citation.style.top = (window.pageYOffset + refRect.top - 20) + 'px';
+                    citation.style.display = 'block';
+                }
+            });
+        }
+        
+        // Run initially and on scroll/resize
+        positionCitations();
+        window.addEventListener('scroll', positionCitations);
+        window.addEventListener('resize', positionCitations);
+    });
+</script>
+{{ end }}

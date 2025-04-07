@@ -53,13 +53,9 @@ defaultContentLanguageInSubdir = false
     url = "/tutorials/"
     weight = 3
   [[menu.main]]
-    name = "Gallary"
-    url = "/Gallary/"
-    weight = 4
-  [[menu.main]]
     name = "Tags"
     url = "/tags/"
-    weight = 5
+    weight = 4
 
 # Arabic menu
 [languages.ar.menu]

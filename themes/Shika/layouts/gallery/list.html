@@ -1,0 +1,49 @@
+{{ define "main" }}
+<header>
+    <a href="{{ .Site.Home.GetPage `/` | relLangURL }}" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>{{ if eq .Site.Language.Lang "ar" }}العودة إلى الصفحة الرئيسية{{ else }}Back to home{{ end }}</span>
+    </a>
+    <div class="container">
+        <h1 class="bg-heading">{{ .Title }}</h1>
+        <p class="tutorials-intro">{{ .Description }}</p>
+    </div>
+    <hr class="line">
+</header>
+
+<div class="gallery-page">
+    <div class="main-container">
+        {{ .Content }}
+    </div>
+</div>
+
+<style>
+    .gallery-page {
+        padding: 2rem 0;
+    }
+    
+    .gallery-page .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .gallery-page h2 {
+        margin-top: 3rem;
+        color: #00ffab;
+        border-bottom: 1px solid rgba(0, 255, 171, 0.2);
+        padding-bottom: 0.5rem;
+    }
+    
+    .gallery-page ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .gallery-page .main-container {
+            padding: 0 1rem;
+        }
+    }
+</style>
+{{ end }} 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,166 +10,164 @@
 </head>
 
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        {{- partial "language-switcher.html" . -}}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="profile-image">
+            <img src="{{ absURL `img/pircture.jfif` }}" alt="Ali Mashally">
+        </div>
+        <h1 class="bg-heading">Ali Mashally</h1>
+        <p class="hero-subtitle">Web Developer & Tech Enthusiast</p>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div class="hero-cta">
+            <a href="https://raqmna.org" class="primary-btn">Explore My Work</a>
+        </div>
+    </div>
+    <div class="hero-backdrop"></div>
+</section>
+
+<!-- Navigation -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <ul>
+            {{ range site.Menus.main }}
+                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+</nav>
+
+<main>
+<!-- Featured Section -->
+<section id="featured" class="featured-section">
+    <div class="section-header">
+        <h2 class="section-title">Featured Posts</h2>
+        <p class="section-subtitle">My latest thoughts and insights</p>
+    </div>
+    
+    <div class="featured-grid">
+        {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
+        <div class="featured-card">
+            {{ if .Params.image }}
+            <div class="card-image">
+                <img src="{{ .Params.image }}" alt="{{ .Title }}">
+            </div>
+            {{ end }}
+            <div class="card-content">
+                <span class="card-date">{{ .Date.Format "January 2, 2006" }}</span>
+                <h3 class="card-title">{{ .Title }}</h3>
+                <p class="card-excerpt">{{ .Content | strings.Truncate 120 | plainify | safeHTML }}</p>
+                <div class="card-footer">
+                    <a href="{{ .RelPermalink }}" class="read-more">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+                    {{ if .Params.tags }}
+                    <div class="card-tags">
+                        {{ range first 2 .Params.tags }}
+                        <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    <div class="section-footer">
+        <a href="{{ absURL `posts` }}" class="view-all">View All Posts</a>
+    </div>
+</section>
+
+<!-- Tutorials Section -->
+<section class="tutorials-section">
+    <div class="section-header">
+        <h2 class="section-title">Latest Tutorials</h2>
+        <p class="section-subtitle">Learn something new today</p>
+    </div>
+    
+    <div class="tutorials-grid">
+        {{ range first 2 (where .Site.RegularPages "Section" "tutorials") }}
+        <div class="tutorial-card">
+            {{ if .Params.image }}
+            <div class="card-image">
+                <img src="{{ .Params.image }}" alt="{{ .Title }}">
+            </div>
+            {{ end }}
+            <div class="card-content">
+                <span class="card-tag">Tutorial</span>
+                <h3 class="card-title">{{ .Title }}</h3>
+                <p class="card-excerpt">{{ .Content | strings.Truncate 100 | plainify | safeHTML }}</p>
+                <div class="card-footer">
+                    <a href="{{ .RelPermalink }}" class="read-more">Start Learning <i class="fa-solid fa-arrow-right"></i></a>
+                    {{ if .Params.tags }}
+                    <div class="card-tags">
+                        {{ range first 2 .Params.tags }}
+                        <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    <div class="section-footer">
+        <a href="{{ absURL `tutorials` }}" class="view-all">View All Tutorials</a>
+    </div>
+</section>
+</main>
+
+{{- partial "footer.html" . -}}
+
+<!-- About Section -->
+<section class="about-section">
+    <div class="about-content">
+        <div class="about-text">
+            <h2 class="section-title">About Me</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium suscipit vero eligendi, nihil quasi rerum impedit et consequuntur amet eaque dolor ex. Quisquam quasi, magni reiciendis porro facilis pariatur totam.</p>
+            <p>I'm passionate about web development, designing beautiful interfaces, and sharing my knowledge with others.</p>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animate hero section
+        setTimeout(function() {
+            document.querySelector('.hero-content').classList.add('active');
+        }, 200);
         
-        <div class="hero-content">
-            <div class="profile-image">
-                <img src="{{ absURL `img/pircture.jfif` }}" alt="Ali Mashally">
-            </div>
-            <h1 class="bg-heading">Ali Mashally</h1>
-            <p class="hero-subtitle">Web Developer & Tech Enthusiast</p>
-            <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-            <div class="hero-cta">
-                <a href="https://raqmna.org" class="primary-btn">Explore My Work</a>
-            </div>
-        </div>
-        <div class="hero-backdrop"></div>
-    </section>
-
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <ul>
-                {{ range site.Menus.main }}
-                    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-                {{ end }}
-            </ul>
-        </div>
-    </nav>
-
-    <main>
-        <!-- Featured Section -->
-        <section id="featured" class="featured-section">
-            <div class="section-header">
-                <h2 class="section-title">Featured Posts</h2>
-                <p class="section-subtitle">My latest thoughts and insights</p>
-            </div>
-            
-            <div class="featured-grid">
-                {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
-                <div class="featured-card">
-                    {{ if .Params.image }}
-                    <div class="card-image">
-                        <img src="{{ .Params.image }}" alt="{{ .Title }}">
-                    </div>
-                    {{ end }}
-                    <div class="card-content">
-                        <span class="card-date">{{ .Date.Format "January 2, 2006" }}</span>
-                        <h3 class="card-title">{{ .Title }}</h3>
-                        <p class="card-excerpt">{{ .Content | strings.Truncate 120 | plainify | safeHTML }}</p>
-                        <div class="card-footer">
-                            <a href="{{ .RelPermalink }}" class="read-more">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-                            {{ if .Params.tags }}
-                            <div class="card-tags">
-                                {{ range first 2 .Params.tags }}
-                                <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
-                                {{ end }}
-                            </div>
-                            {{ end }}
-                        </div>
-                    </div>
-                </div>
-                {{ end }}
-            </div>
-            <div class="section-footer">
-                <a href="{{ absURL `posts` }}" class="view-all">View All Posts</a>
-            </div>
-        </section>
-
-        <!-- Tutorials Section -->
-        <section class="tutorials-section">
-            <div class="section-header">
-                <h2 class="section-title">Latest Tutorials</h2>
-                <p class="section-subtitle">Learn something new today</p>
-            </div>
-            
-            <div class="tutorials-grid">
-                {{ range first 2 (where .Site.RegularPages "Section" "tutorials") }}
-                <div class="tutorial-card">
-                    {{ if .Params.image }}
-                    <div class="card-image">
-                        <img src="{{ .Params.image }}" alt="{{ .Title }}">
-                    </div>
-                    {{ end }}
-                    <div class="card-content">
-                        <span class="card-tag">Tutorial</span>
-                        <h3 class="card-title">{{ .Title }}</h3>
-                        <p class="card-excerpt">{{ .Content | strings.Truncate 100 | plainify | safeHTML }}</p>
-                        <div class="card-footer">
-                            <a href="{{ .RelPermalink }}" class="read-more">Start Learning <i class="fa-solid fa-arrow-right"></i></a>
-                            {{ if .Params.tags }}
-                            <div class="card-tags">
-                                {{ range first 2 .Params.tags }}
-                                <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
-                                {{ end }}
-                            </div>
-                            {{ end }}
-                        </div>
-                    </div>
-                </div>
-                {{ end }}
-            </div>
-            <div class="section-footer">
-                <a href="{{ absURL `tutorials` }}" class="view-all">View All Tutorials</a>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about-section">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="section-title">About Me</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium suscipit vero eligendi, nihil quasi rerum impedit et consequuntur amet eaque dolor ex. Quisquam quasi, magni reiciendis porro facilis pariatur totam.</p>
-                    <p>I'm passionate about web development, designing beautiful interfaces, and sharing my knowledge with others.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    {{- partial "footer.html" . -}}
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate hero section
-            setTimeout(function() {
-                document.querySelector('.hero-content').classList.add('active');
-            }, 200);
-            
-            // Intersection Observer for scroll animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.featured-card, .tutorial-card, .section-header, .about-content').forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Sticky navigation
-            const nav = document.querySelector('.main-nav');
-            const navTop = nav.offsetTop;
-            
-            function stickyNav() {
-                if (window.scrollY >= navTop) {
-                    document.body.classList.add('fixed-nav');
-                } else {
-                    document.body.classList.remove('fixed-nav');
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
                 }
-            }
-            
-            window.addEventListener('scroll', stickyNav);
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.featured-card, .tutorial-card, .section-header, .about-content').forEach(el => {
+            observer.observe(el);
         });
-    </script>
+        
+        // Sticky navigation
+        const nav = document.querySelector('.main-nav');
+        const navTop = nav.offsetTop;
+        
+        function stickyNav() {
+            if (window.scrollY >= navTop) {
+                document.body.classList.add('fixed-nav');
+            } else {
+                document.body.classList.remove('fixed-nav');
+            }
+        }
+        
+        window.addEventListener('scroll', stickyNav);
+    });
+</script>
 </body>
 </html> 
