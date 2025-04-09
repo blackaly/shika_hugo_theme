@@ -245,6 +245,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💖 Acknowledgements
 
-- [Hugo](https://gohugo.io/) for the amazing static site generator
-- [Font Awesome](https://fontawesome.com/) for the icons
-- All the contributors who make this project better! 
+- [Hugo](https://gohugo.io/) for the amazing static site generator.
