@@ -1,0 +1,75 @@
+<div class="language-switcher">
+    {{ range .Site.Languages }}
+        {{ if ne .Lang $.Site.Language.Lang }}
+            <a href="{{ if .IsMultiLingual }}{{ .Lang | relLangURL }}{{ else }}{{ .BaseURL }}{{ end }}" 
+               class="lang-link" 
+               title="{{ .LanguageName }}">
+                {{ if eq .Lang "ar" }}
+                    <i class="fas fa-globe"></i> العربية
+                {{ else }}
+                    <i class="fas fa-globe"></i> English
+                {{ end }}
+            </a>
+        {{ end }}
+    {{ end }}
+</div>
+
+<style>
+.language-switcher {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    background: rgba(18, 18, 18, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.lang-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    padding: 0.3rem 0;
+}
+
+.lang-link:hover {
+    color: #00ffab;
+    transform: translateY(-1px);
+}
+
+.lang-link i {
+    font-size: 0.8rem;
+    color: #00ffab;
+}
+
+/* RTL adjustments */
+html[lang="ar"] .language-switcher {
+    right: auto;
+    left: 1rem;
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    html[lang="ar"] .language-switcher {
+        right: auto;
+        left: 0.5rem;
+    }
+    
+    .lang-link {
+        font-size: 0.8rem;
+    }
+}
+</style>
