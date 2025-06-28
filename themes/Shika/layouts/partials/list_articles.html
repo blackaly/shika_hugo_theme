@@ -1,8 +1,26 @@
 <div class="post-filter-container">
     <div class="post-filters">
-        <button class="filter-button active" data-filter="all">All Posts</button>
-        <button class="filter-button" data-filter="featured">Featured</button>
-        <button class="filter-button" data-filter="recent">Recent Posts</button>
+        <button class="filter-button active" data-filter="all">
+            {{ if eq .Site.Language.Lang "ar" }}
+            جميع المقالات
+            {{ else }}
+            All Posts
+            {{ end }}
+        </button>
+        <button class="filter-button" data-filter="featured">
+            {{ if eq .Site.Language.Lang "ar" }}
+            المميزة
+            {{ else }}
+            Featured
+            {{ end }}
+        </button>
+        <button class="filter-button" data-filter="recent">
+            {{ if eq .Site.Language.Lang "ar" }}
+            الأحدث
+            {{ else }}
+            Recent Posts
+            {{ end }}
+        </button>
     </div>
 </div>
 
@@ -54,13 +72,25 @@
                                 {{ if .Summary }}
                                 <p>{{ .Summary | plainify | truncate 120 }}</p>
                                 {{ else }}
-                                <p>{{ .Title }} - Click to read more about this topic.</p>
+                                <p>{{ .Title }} - 
+                                    {{ if eq .Site.Language.Lang "ar" }}
+                                    انقر لقراءة المزيد حول هذا الموضوع.
+                                    {{ else }}
+                                    Click to read more about this topic.
+                                    {{ end }}
+                                </p>
                                 {{ end }}
                             </div>
                             
                             <!-- Footer with read more -->
                             <div class="card-footer">
-                                <span class="read-more">Read article <i class="fa-solid fa-arrow-right"></i></span>
+                                <span class="read-more">
+                                    {{ if eq .Site.Language.Lang "ar" }}
+                                    اقرأ المقال <i class="fa-solid fa-arrow-left"></i>
+                                    {{ else }}
+                                    Read article <i class="fa-solid fa-arrow-right"></i>
+                                    {{ end }}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -71,8 +101,20 @@
     {{ end }}
     {{ if eq $postCount 0 }}
     <div class="no-posts">
-        <h2>No posts found</h2>
-        <p>There are no posts available at this time.</p>
+        <h2>
+            {{ if eq .Site.Language.Lang "ar" }}
+            لم يتم العثور على مقالات
+            {{ else }}
+            No posts found
+            {{ end }}
+        </h2>
+        <p>
+            {{ if eq .Site.Language.Lang "ar" }}
+            لا توجد مقالات متاحة في الوقت الحالي.
+            {{ else }}
+            There are no posts available at this time.
+            {{ end }}
+        </p>
     </div>
     {{ end }}
 </section>
@@ -86,7 +128,12 @@
         if (articles.length === 0) {
             const container = document.querySelector('.article-container');
             if (!container.querySelector('.no-posts')) {
-                container.innerHTML = '<div class="no-posts"><h2>No posts found</h2><p>There are no posts available at this time.</p></div>';
+                const noPostsText = {{ if eq .Site.Language.Lang "ar" }}
+                    '<div class="no-posts"><h2>لم يتم العثور على مقالات</h2><p>لا توجد مقالات متاحة في الوقت الحالي.</p></div>';
+                {{ else }}
+                    '<div class="no-posts"><h2>No posts found</h2><p>There are no posts available at this time.</p></div>';
+                {{ end }}
+                container.innerHTML = noPostsText;
             }
         } else {
             // Force images to be shown by reloading them
@@ -154,7 +201,13 @@
                     const container = document.querySelector('.article-container');
                     const noPostsMsg = document.createElement('div');
                     noPostsMsg.className = 'no-posts';
-                    noPostsMsg.innerHTML = `<h2>No ${filter} posts found</h2><p>There are no posts available for this filter.</p>`;
+                    
+                    const isArabic = {{ if eq .Site.Language.Lang "ar" }}true{{ else }}false{{ end }};
+                    if (isArabic) {
+                        noPostsMsg.innerHTML = `<h2>لم يتم العثور على مقالات ${filter === 'featured' ? 'مميزة' : filter === 'recent' ? 'حديثة' : ''}</h2><p>لا توجد مقالات متاحة لهذا المرشح.</p>`;
+                    } else {
+                        noPostsMsg.innerHTML = `<h2>No ${filter} posts found</h2><p>There are no posts available for this filter.</p>`;
+                    }
                     
                     // Remove any existing no-posts message
                     const existingMsg = container.querySelector('.no-posts');
@@ -186,173 +239,3 @@
         });
     });
 </script>
-
-<style>
-/* Article listing styling */
-.article-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.article-card {
-    margin-bottom: 2rem;
-}
-
-.card-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-}
-
-.article-image {
-    margin-bottom: 1rem;
-}
-
-.article-image img {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-/* Renamed from article-content to article-card-content */
-.article-card-content {
-    padding: 0.5rem 0;
-}
-
-.article-title {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-.card-link:hover .article-title {
-    color: #00ffab;
-}
-
-.article-date {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.article-summary {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-
-.read-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #00ffab;
-    font-weight: 600;
-    text-decoration: none;
-    margin-bottom: 1.5rem;
-}
-
-.read-more i {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.card-link:hover .read-more i {
-    transform: translateX(5px);
-}
-
-.article-divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(0, 255, 171, 0.3), rgba(255, 255, 255, 0.1));
-    margin: 2rem 0;
-}
-
-.article-card:last-child .article-divider {
-    display: none;
-}
-
-.featured-post-tag {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: #00ffab;
-    color: #121212;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    z-index: 10;
-}
-
-/* Post filters */
-.post-filter-container {
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.post-filters {
-    display: inline-flex;
-    gap: 1rem;
-}
-
-.filter-button {
-    background-color: rgba(30, 30, 30, 0.8);
-    color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.7rem 1.5rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.filter-button.active {
-    background-color: #00ffab;
-    color: #121212;
-    border-color: #00ffab;
-}
-
-.filter-button:hover:not(.active) {
-    background-color: rgba(0, 255, 171, 0.2);
-    border-color: rgba(0, 255, 171, 0.3);
-}
-
-.no-posts {
-    text-align: center;
-    padding: 3rem;
-    background: rgba(30, 30, 30, 0.7);
-    border-radius: 8px;
-    margin: 2rem 0;
-}
-
-.no-posts h2 {
-    color: #00ffab;
-    margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-    .article-title {
-        font-size: 1.5rem;
-    }
-    
-    .article-image img {
-        max-height: 250px;
-    }
-    
-    .post-filters {
-        flex-wrap: wrap;
-    }
-}
-
-@media (max-width: 480px) {
-    .article-title {
-        font-size: 1.3rem;
-    }
-    
-    .article-image img {
-        max-height: 200px;
-    }
-}
-</style> 

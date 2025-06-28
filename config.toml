@@ -1,36 +1,36 @@
 baseURL = "/"
-languageCode = "en-us"
-title = "Shika Theme"
+languageCode = "ar"
+title = "قالب شيكا"
 theme = "Shika"
 
 # Default content language
-defaultContentLanguage = "en"
+defaultContentLanguage = "ar"
 defaultContentLanguageInSubdir = false
 
 # Enable multiple languages
 [languages]
-  [languages.en]
-    languageName = "English"
-    weight = 1
-    title = "Shika Theme"
-    description = "A modern and elegant Hugo theme"
-    contentDir = "content/en"
-    [languages.en.params]
-      languageDirection = "ltr"
-  
   [languages.ar]
     languageName = "العربية"
-    weight = 2
+    weight = 1
     title = "قالب شيكا"
     description = "قالب هوجو حديث وأنيق"
     contentDir = "content/ar"
     [languages.ar.params]
       languageDirection = "rtl"
+  
+  [languages.en]
+    languageName = "English"
+    weight = 2
+    title = "Shika Theme"
+    description = "A modern and elegant Hugo theme"
+    contentDir = "content/en"
+    [languages.en.params]
+      languageDirection = "ltr"
 
 # Site parameters
 [params]
-  author = "Shika"
-  description = "A modern and elegant Hugo theme"
+  author = "شيكا"
+  description = "قالب هوجو حديث وأنيق"
   mainSections = ["posts", "tutorials"]
   
   # Social media
@@ -38,36 +38,40 @@ defaultContentLanguageInSubdir = false
   twitter = "https://twitter.com/"
   linkedin = "https://linkedin.com/in/"
 
-# Menu 
+# Arabic menu (default)
 [menu]
   [[menu.main]]
-    name = "Home"
+    name = "الرئيسية"
     url = "/"
     weight = 1
   [[menu.main]]
-    name = "Posts"
+    name = "المقالات"
     url = "/posts/"
     weight = 2
   [[menu.main]]
-    name = "Tutorials"
+    name = "الدروس"
     url = "/tutorials/"
     weight = 3
   [[menu.main]]
-    name = "Tags"
+    name = "الوسوم"
     url = "/tags/"
     weight = 4
 
-# Arabic menu
-[languages.ar.menu]
-  [[languages.ar.menu.main]]
-    name = "الرئيسية"
-    url = "/ar/"
+# English menu
+[languages.en.menu]
+  [[languages.en.menu.main]]
+    name = "Home"
+    url = "/en/"
     weight = 1
-  [[languages.ar.menu.main]]
-    name = "المقالات"
-    url = "/ar/posts/"
+  [[languages.en.menu.main]]
+    name = "Posts"
+    url = "/en/posts/"
     weight = 2
-  [[languages.ar.menu.main]]
-    name = "الدروس"
-    url = "/ar/tutorials/"
+  [[languages.en.menu.main]]
+    name = "Tutorials"
+    url = "/en/tutorials/"
     weight = 3
+  [[languages.en.menu.main]]
+    name = "Tags"
+    url = "/en/tags/"
+    weight = 4
