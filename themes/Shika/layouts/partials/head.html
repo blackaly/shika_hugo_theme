@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ absURL `/css/reset.css` }}">
     <link rel="stylesheet" href="{{ absURL `/css/style.css` }}">
     <link rel="stylesheet" href="{{ absURL `/css/utilities.css` }}">
+    <link rel="stylesheet" href="{{ absURL `/css/nested-nav.css` }}">
     
     {{ if eq .Section "posts" }}
     <link rel="stylesheet" href="{{ absURL `/css/list_article.css` }}">
@@ -59,6 +60,9 @@
         // Preload critical images
         preloadImages(criticalImages);
     </script>
+    
+    <!-- Load nested navigation JavaScript -->
+    <script src="{{ absURL `/js/nested-nav.js` }}" defer></script>
     
     <!-- Ensure images are displayed properly -->
     <style>

@@ -1,0 +1,18 @@
+<nav class="nested-nav">
+    <div class="nav-header">
+        <h3 class="nav-title">
+            {{ if eq .Site.Language.Lang "ar" }}
+            التنقل
+            {{ else }}
+            Navigation
+            {{ end }}
+        </h3>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
+    <div class="nav-content">
+        {{ partial "render-menu-tree" (dict "menuItems" .Site.Menus.main "level" 0 "site" .Site) }}
+    </div>
+</nav>
