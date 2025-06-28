@@ -38,124 +38,40 @@ defaultContentLanguageInSubdir = false
   twitter = "https://twitter.com/"
   linkedin = "https://linkedin.com/in/"
 
-# Arabic menu (default) - Enhanced with nested structure
+# Arabic menu (default)
 [menu]
   [[menu.main]]
     name = "الرئيسية"
     url = "/"
     weight = 1
-    identifier = "home"
-  
   [[menu.main]]
-    name = "المحتوى"
-    url = "#"
-    weight = 2
-    identifier = "content"
-  
-  [[menu.main_children]]
     name = "المقالات"
     url = "/posts/"
-    weight = 1
-    identifier = "posts"
-    parent = "content"
-  
-  [[menu.main_children]]
+    weight = 2
+  [[menu.main]]
     name = "الدروس"
     url = "/tutorials/"
-    weight = 2
-    identifier = "tutorials"
-    parent = "content"
-  
-  [[menu.main_children]]
-    name = "سلاسل الدروس"
-    url = "/tutorial-series/"
     weight = 3
-    identifier = "tutorial-series"
-    parent = "content"
-  
   [[menu.main]]
-    name = "التصنيفات"
-    url = "#"
-    weight = 3
-    identifier = "categories"
-  
-  [[menu.categories_children]]
     name = "الوسوم"
     url = "/tags/"
-    weight = 1
-    identifier = "tags"
-    parent = "categories"
-  
-  [[menu.categories_children]]
-    name = "الموضوعات"
-    url = "/topics/"
-    weight = 2
-    identifier = "topics"
-    parent = "categories"
-  
-  [[menu.main]]
-    name = "حول"
-    url = "/about/"
     weight = 4
-    identifier = "about"
 
-# English menu - Enhanced with nested structure
+# English menu
 [languages.en.menu]
   [[languages.en.menu.main]]
     name = "Home"
     url = "/en/"
     weight = 1
-    identifier = "home"
-  
   [[languages.en.menu.main]]
-    name = "Content"
-    url = "#"
-    weight = 2
-    identifier = "content"
-  
-  [[languages.en.menu.main_children]]
     name = "Posts"
     url = "/en/posts/"
-    weight = 1
-    identifier = "posts"
-    parent = "content"
-  
-  [[languages.en.menu.main_children]]
+    weight = 2
+  [[languages.en.menu.main]]
     name = "Tutorials"
     url = "/en/tutorials/"
-    weight = 2
-    identifier = "tutorials"
-    parent = "content"
-  
-  [[languages.en.menu.main_children]]
-    name = "Tutorial Series"
-    url = "/en/tutorial-series/"
     weight = 3
-    identifier = "tutorial-series"
-    parent = "content"
-  
   [[languages.en.menu.main]]
-    name = "Categories"
-    url = "#"
-    weight = 3
-    identifier = "categories"
-  
-  [[languages.en.menu.categories_children]]
     name = "Tags"
     url = "/en/tags/"
-    weight = 1
-    identifier = "tags"
-    parent = "categories"
-  
-  [[languages.en.menu.categories_children]]
-    name = "Topics"
-    url = "/en/topics/"
-    weight = 2
-    identifier = "topics"
-    parent = "categories"
-  
-  [[languages.en.menu.main]]
-    name = "About"
-    url = "/en/about/"
     weight = 4
-    identifier = "about"

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="{{ absURL `css/style.css`}}">
     <link rel="stylesheet" href="{{ absURL `css/home.css`}}">
-    <link rel="stylesheet" href="{{ absURL `css/nested-nav.css`}}">
     
     <!-- Arabic font support -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,8 +73,16 @@
     <div class="hero-backdrop"></div>
 </section>
 
-<!-- Nested Navigation -->
-{{- partial "nested-navbar.html" . -}}
+<!-- Navigation -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <ul>
+            {{ range site.Menus.main }}
+                <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+</nav>
 
 <main>
 <!-- Featured Section -->
@@ -233,7 +240,6 @@
     </div>
 </section>
 
-<script src="{{ absURL `/js/nested-nav.js` }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Animate hero section
@@ -254,6 +260,20 @@
         document.querySelectorAll('.featured-card, .tutorial-card, .section-header, .about-content').forEach(el => {
             observer.observe(el);
         });
+        
+        // Sticky navigation
+        const nav = document.querySelector('.main-nav');
+        const navTop = nav.offsetTop;
+        
+        function stickyNav() {
+            if (window.scrollY >= navTop) {
+                document.body.classList.add('fixed-nav');
+            } else {
+                document.body.classList.remove('fixed-nav');
+            }
+        }
+        
+        window.addEventListener('scroll', stickyNav);
     });
 </script>
 </body>
