@@ -1,8 +1,6 @@
 {{ define "main" }}
 <div class="home-container">
-    <div class="hero-section">
-        {{- partial "language-switcher.html" . -}}
-        
+    <div class="hero-section">        
         <div class="hero-content">
             <h1 class="hero-title">
                 {{ if eq .Site.Language.Lang "ar" }}
