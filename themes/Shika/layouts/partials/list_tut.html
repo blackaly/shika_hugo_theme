@@ -1,19 +1,7 @@
 <div class="post-filter-container">
     <div class="post-filters">
-        <button class="filter-button active" data-filter="all">
-            {{ if eq .Site.Language.Lang "ar" }}
-            جميع الدروس
-            {{ else }}
-            All Tutorials
-            {{ end }}
-        </button>
-        <button class="filter-button" data-filter="recent">
-            {{ if eq .Site.Language.Lang "ar" }}
-            الدروس الحديثة
-            {{ else }}
-            Recent Tutorials
-            {{ end }}
-        </button>
+        <button class="filter-button active" data-filter="all">All Tutorials</button>
+        <button class="filter-button" data-filter="recent">Recent Tutorials</button>
     </div>
 </div>
 
@@ -67,25 +55,13 @@
                                 {{ if .Summary }}
                                 <p>{{ .Summary | plainify | truncate 120 }}</p>
                                 {{ else }}
-                                <p>{{ .Title }} - 
-                                    {{ if eq .Site.Language.Lang "ar" }}
-                                    انقر لبدء هذا الدرس.
-                                    {{ else }}
-                                    Click to start this tutorial.
-                                    {{ end }}
-                                </p>
+                                <p>{{ .Title }} - Click to start this tutorial.</p>
                                 {{ end }}
                             </div>
                             
                             <!-- Footer with read more -->
                             <div class="card-footer">
-                                <span class="read-more">
-                                    {{ if eq .Site.Language.Lang "ar" }}
-                                    ابدأ التعلم <i class="fa-solid fa-arrow-left"></i>
-                                    {{ else }}
-                                    Start learning <i class="fa-solid fa-arrow-right"></i>
-                                    {{ end }}
-                                </span>
+                                <span class="read-more">Start learning <i class="fa-solid fa-arrow-right"></i></span>
                             </div>
                         </div>
                     </div>
@@ -96,20 +72,8 @@
     {{ end }}
     {{ if eq $tutCount 0 }}
     <div class="no-posts">
-        <h2>
-            {{ if eq .Site.Language.Lang "ar" }}
-            لم يتم العثور على دروس
-            {{ else }}
-            No tutorials found
-            {{ end }}
-        </h2>
-        <p>
-            {{ if eq .Site.Language.Lang "ar" }}
-            لا توجد دروس متاحة في الوقت الحالي.
-            {{ else }}
-            There are no tutorials available at this time.
-            {{ end }}
-        </p>
+        <h2>No tutorials found</h2>
+        <p>There are no tutorials available at this time.</p>
     </div>
     {{ end }}
 </section>
@@ -123,12 +87,7 @@
         if (articles.length === 0) {
             const container = document.querySelector('.article-container');
             if (!container.querySelector('.no-posts')) {
-                const noPostsText = {{ if eq .Site.Language.Lang "ar" }}
-                    '<div class="no-posts"><h2>لم يتم العثور على دروس</h2><p>لا توجد دروس متاحة في الوقت الحالي.</p></div>';
-                {{ else }}
-                    '<div class="no-posts"><h2>No tutorials found</h2><p>There are no tutorials available at this time.</p></div>';
-                {{ end }}
-                container.innerHTML = noPostsText;
+                container.innerHTML = '<div class="no-posts"><h2>No tutorials found</h2><p>There are no tutorials available at this time.</p></div>';
             }
         } else {
             // Force images to be shown by reloading them
@@ -181,13 +140,7 @@
                     const container = document.querySelector('.article-container');
                     const noPostsMsg = document.createElement('div');
                     noPostsMsg.className = 'no-posts';
-                    
-                    const isArabic = {{ if eq .Site.Language.Lang "ar" }}true{{ else }}false{{ end }};
-                    if (isArabic) {
-                        noPostsMsg.innerHTML = `<h2>لم يتم العثور على دروس ${filter === 'recent' ? 'حديثة' : ''}</h2><p>لا توجد دروس متاحة لهذا المرشح.</p>`;
-                    } else {
-                        noPostsMsg.innerHTML = `<h2>No ${filter} tutorials found</h2><p>There are no tutorials available for this filter.</p>`;
-                    }
+                    noPostsMsg.innerHTML = `<h2>No ${filter} tutorials found</h2><p>There are no tutorials available for this filter.</p>`;
                     
                     // Remove any existing no-posts message
                     const existingMsg = container.querySelector('.no-posts');
@@ -235,10 +188,4 @@
     font-size: 0.9rem;
     margin-left: auto;
 }
-
-/* RTL adjustments */
-html[lang="ar"] .tutorial-number {
-    margin-left: 0;
-    margin-right: auto;
-}
-</style>
+</style> 

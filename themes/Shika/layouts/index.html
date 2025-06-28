@@ -1,59 +1,23 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" {{ if eq .Site.Language.Lang "ar" }}dir="rtl"{{ else }}dir="ltr"{{ end }}>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="{{ absURL `css/style.css`}}">
     <link rel="stylesheet" href="{{ absURL `css/home.css`}}">
-    
-    <!-- Arabic font support -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    {{ if eq .Site.Language.Lang "ar" }}
-    <link rel="stylesheet" href="{{ absURL `/css/rtl.css` }}">
-    <style>
-        body, html {
-            font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif;
-        }
-    </style>
-    {{ end }}
-    
-    <title>
-        {{ if eq .Site.Language.Lang "ar" }}
-        مدونة علي مشعلي
-        {{ else }}
-        Ali Mashally's Blog
-        {{ end }}
-    </title>
+    <title>Mashally's Blog</title>
 </head>
 
 <body>
-<!-- Language Switcher -->
-{{- partial "language-switcher.html" . -}}
-
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
         <div class="profile-image">
             <img src="{{ absURL `img/pircture.jfif` }}" alt="Ali Mashally">
         </div>
-        <h1 class="bg-heading">
-            {{ if eq .Site.Language.Lang "ar" }}
-            علي مشعلي
-            {{ else }}
-            Ali Mashally
-            {{ end }}
-        </h1>
-        <p class="hero-subtitle">
-            {{ if eq .Site.Language.Lang "ar" }}
-            مطور ويب ومتحمس للتكنولوجيا
-            {{ else }}
-            Web Developer & Tech Enthusiast
-            {{ end }}
-        </p>
+        <h1 class="bg-heading">Ali Mashally</h1>
+        <p class="hero-subtitle">Web Developer & Tech Enthusiast</p>
         <div class="social-icons">
             <a href="#"><i class="fa-brands fa-github"></i></a>
             <a href="#"><i class="fa-brands fa-twitter"></i></a>
@@ -61,13 +25,7 @@
             <a href="#"><i class="fa-brands fa-youtube"></i></a>
         </div>
         <div class="hero-cta">
-            <a href="https://raqmna.org" class="primary-btn">
-                {{ if eq .Site.Language.Lang "ar" }}
-                استكشف أعمالي
-                {{ else }}
-                Explore My Work
-                {{ end }}
-            </a>
+            <a href="https://raqmna.org" class="primary-btn">Explore My Work</a>
         </div>
     </div>
     <div class="hero-backdrop"></div>
@@ -78,7 +36,7 @@
     <div class="nav-container">
         <ul>
             {{ range site.Menus.main }}
-                <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
             {{ end }}
         </ul>
     </div>
@@ -88,20 +46,8 @@
 <!-- Featured Section -->
 <section id="featured" class="featured-section">
     <div class="section-header">
-        <h2 class="section-title">
-            {{ if eq .Site.Language.Lang "ar" }}
-            المقالات المميزة
-            {{ else }}
-            Featured Posts
-            {{ end }}
-        </h2>
-        <p class="section-subtitle">
-            {{ if eq .Site.Language.Lang "ar" }}
-            آخر أفكاري ورؤاي
-            {{ else }}
-            My latest thoughts and insights
-            {{ end }}
-        </p>
+        <h2 class="section-title">Featured Posts</h2>
+        <p class="section-subtitle">My latest thoughts and insights</p>
     </div>
     
     <div class="featured-grid">
@@ -117,17 +63,11 @@
                 <h3 class="card-title">{{ .Title }}</h3>
                 <p class="card-excerpt">{{ .Content | strings.Truncate 120 | plainify | safeHTML }}</p>
                 <div class="card-footer">
-                    <a href="{{ .RelPermalink }}" class="read-more">
-                        {{ if eq $.Site.Language.Lang "ar" }}
-                        اقرأ المقال <i class="fa-solid fa-arrow-left"></i>
-                        {{ else }}
-                        Read Article <i class="fa-solid fa-arrow-right"></i>
-                        {{ end }}
-                    </a>
+                    <a href="{{ .RelPermalink }}" class="read-more">Read Article <i class="fa-solid fa-arrow-right"></i></a>
                     {{ if .Params.tags }}
                     <div class="card-tags">
                         {{ range first 2 .Params.tags }}
-                        <a href="{{ absURL (printf "tags/%s" (urlize .)) | relLangURL }}" class="tag-link">{{ . }}</a>
+                        <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
                         {{ end }}
                     </div>
                     {{ end }}
@@ -137,33 +77,15 @@
         {{ end }}
     </div>
     <div class="section-footer">
-        <a href="{{ absURL `posts` | relLangURL }}" class="view-all">
-            {{ if eq .Site.Language.Lang "ar" }}
-            عرض جميع المقالات
-            {{ else }}
-            View All Posts
-            {{ end }}
-        </a>
+        <a href="{{ absURL `posts` }}" class="view-all">View All Posts</a>
     </div>
 </section>
 
 <!-- Tutorials Section -->
 <section class="tutorials-section">
     <div class="section-header">
-        <h2 class="section-title">
-            {{ if eq .Site.Language.Lang "ar" }}
-            أحدث الدروس
-            {{ else }}
-            Latest Tutorials
-            {{ end }}
-        </h2>
-        <p class="section-subtitle">
-            {{ if eq .Site.Language.Lang "ar" }}
-            تعلم شيئاً جديداً اليوم
-            {{ else }}
-            Learn something new today
-            {{ end }}
-        </p>
+        <h2 class="section-title">Latest Tutorials</h2>
+        <p class="section-subtitle">Learn something new today</p>
     </div>
     
     <div class="tutorials-grid">
@@ -175,27 +97,15 @@
             </div>
             {{ end }}
             <div class="card-content">
-                <span class="card-tag">
-                    {{ if eq $.Site.Language.Lang "ar" }}
-                    درس
-                    {{ else }}
-                    Tutorial
-                    {{ end }}
-                </span>
+                <span class="card-tag">Tutorial</span>
                 <h3 class="card-title">{{ .Title }}</h3>
                 <p class="card-excerpt">{{ .Content | strings.Truncate 100 | plainify | safeHTML }}</p>
                 <div class="card-footer">
-                    <a href="{{ .RelPermalink }}" class="read-more">
-                        {{ if eq $.Site.Language.Lang "ar" }}
-                        ابدأ التعلم <i class="fa-solid fa-arrow-left"></i>
-                        {{ else }}
-                        Start Learning <i class="fa-solid fa-arrow-right"></i>
-                        {{ end }}
-                    </a>
+                    <a href="{{ .RelPermalink }}" class="read-more">Start Learning <i class="fa-solid fa-arrow-right"></i></a>
                     {{ if .Params.tags }}
                     <div class="card-tags">
                         {{ range first 2 .Params.tags }}
-                        <a href="{{ absURL (printf "tags/%s" (urlize .)) | relLangURL }}" class="tag-link">{{ . }}</a>
+                        <a href="{{ absURL (printf "tags/%s" (urlize .)) }}" class="tag-link">{{ . }}</a>
                         {{ end }}
                     </div>
                     {{ end }}
@@ -205,13 +115,7 @@
         {{ end }}
     </div>
     <div class="section-footer">
-        <a href="{{ absURL `tutorials` | relLangURL }}" class="view-all">
-            {{ if eq .Site.Language.Lang "ar" }}
-            عرض جميع الدروس
-            {{ else }}
-            View All Tutorials
-            {{ end }}
-        </a>
+        <a href="{{ absURL `tutorials` }}" class="view-all">View All Tutorials</a>
     </div>
 </section>
 </main>
@@ -222,20 +126,9 @@
 <section class="about-section">
     <div class="about-content">
         <div class="about-text">
-            <h2 class="section-title">
-                {{ if eq .Site.Language.Lang "ar" }}
-                نبذة عني
-                {{ else }}
-                About Me
-                {{ end }}
-            </h2>
-            <p>
-                {{ if eq .Site.Language.Lang "ar" }}
-                أنا مطور ويب متحمس لتطوير الواجهات الجميلة ومشاركة معرفتي مع الآخرين. أحب العمل على مشاريع مبتكرة وتعلم التقنيات الجديدة.
-                {{ else }}
-                I'm passionate about web development, designing beautiful interfaces, and sharing my knowledge with others. I love working on innovative projects and learning new technologies.
-                {{ end }}
-            </p>
+            <h2 class="section-title">About Me</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium suscipit vero eligendi, nihil quasi rerum impedit et consequuntur amet eaque dolor ex. Quisquam quasi, magni reiciendis porro facilis pariatur totam.</p>
+            <p>I'm passionate about web development, designing beautiful interfaces, and sharing my knowledge with others.</p>
         </div>
     </div>
 </section>
@@ -277,4 +170,4 @@
     });
 </script>
 </body>
-</html>
+</html> 

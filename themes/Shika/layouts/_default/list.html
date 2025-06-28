@@ -1,36 +1,15 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" {{ if eq .Site.Language.Lang "ar" }}dir="rtl"{{ else }}dir="ltr"{{ end }}>
+<html lang="en">
 {{- partial "head.html" . -}}
 <body>
-    {{- partial "language-switcher.html" . -}}
-    
     <header>
-        <a href="{{ .Site.Home.RelPermalink }}" class="back-link">
-            {{ if eq .Site.Language.Lang "ar" }}
-            <i class="fa-solid fa-arrow-right"></i>
-            <span>العودة إلى الصفحة الرئيسية</span>
-            {{ else }}
+        <a href="{{ absURL `/` }}" class="back-link">
             <i class="fa-solid fa-arrow-left"></i>
             <span>Back to home</span>
-            {{ end }}
         </a>
         <div class="container">
             <h1 class="bg-heading">{{ .Title }}</h1>
-            <p class="subtitle">
-                {{ if eq .Section "posts" }}
-                    {{ if eq .Site.Language.Lang "ar" }}
-                    استكشف أحدث مقالاتنا وأفكارنا ورؤانا
-                    {{ else }}
-                    Explore our latest articles, thoughts, and insights
-                    {{ end }}
-                {{ else }}
-                    {{ if eq .Site.Language.Lang "ar" }}
-                    ابحث عن الدروس ومسارات التعلم المنظمة حسب الموضوع
-                    {{ else }}
-                    Find tutorials and learning paths organized by topic
-                    {{ end }}
-                {{ end }}
-            </p>
+            <p class="subtitle">Explore our latest articles, thoughts, and insights</p>
         </div>
     </header>
     

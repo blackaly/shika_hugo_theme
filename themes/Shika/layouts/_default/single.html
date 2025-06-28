@@ -1,24 +1,12 @@
 {{ define "main" }}
 <header>
-    {{- partial "language-switcher.html" . -}}
     
-    <a href="{{ .Site.Home.RelPermalink }}" class="back-link">
-        {{ if eq .Site.Language.Lang "ar" }}
-        <i class="fa-solid fa-arrow-right"></i>
-        <span>العودة إلى الصفحة الرئيسية</span>
-        {{ else }}
+    <a href="{{ .Site.Home.GetPage `/` | relLangURL }}" class="back-link">
         <i class="fa-solid fa-arrow-left"></i>
         <span>Back to home</span>
-        {{ end }}
     </a>
     <div class="container">
-        <span class="tutorial-badge article-badge">
-            {{ if eq .Site.Language.Lang "ar" }}
-            مقال
-            {{ else }}
-            Article
-            {{ end }}
-        </span>
+        <span class="tutorial-badge article-badge">Article</span>
         <h1 class="bg-heading">{{.Title}}</h1>
         {{ if .Date }}
         <p class="article-date">{{ .Date.Format "January 2, 2006" }}</p>
@@ -28,6 +16,7 @@
 </header>
 <div class="main-container">
     {{ partial "article.html" . }}
+    
 </div>
 
 <script>
